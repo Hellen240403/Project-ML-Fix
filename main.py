@@ -1,8 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-
 from PIL import Image
-
 import home
 import forecast
 import prediction
@@ -48,13 +46,13 @@ class MultiApp:
                 )
 
         # Menu
-    if app == "Home":
+        if app == "Home":
             home.app()
-    if app == "Forecast":
+        if app == "Forecast":
             forecast.app()    
-    if app == "Prediction":
+        if app == "Prediction":
             prediction.app()        
-    if app == "About":
+        if app == "About":
             about.app()     
              
     run()            

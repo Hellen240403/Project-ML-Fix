@@ -113,7 +113,7 @@ def app():
 
     # Load Dataset
     df = load_data("data/df_hujan.csv")
-    df['tanggal'] = pd.to_datetime(df['tanggal'])
+    df['tanggal'] = pd.to_datetime(df['tanggal'], format='%Y-%m-%d')
     df.set_index('tanggal', inplace=True)
 
     #Menampilkan data hujan

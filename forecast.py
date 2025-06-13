@@ -7,14 +7,27 @@ from plotly.subplots import make_subplots
 from keras.models import load_model as keras_model
 from sklearn.preprocessing import MinMaxScaler
 
-# Function to load data
-df = load_data(filepath)
-st.write("Kolom CSV:", df.columns.tolist())  # Debugging
-df.columns = df.columns.str.strip().str.lower()
-df['tanggal'] = pd.to_datetime(df['tanggal'], format='%Y-%m-%d')
-df.set_index('tanggal', inplace=True)
+# =========================
+# Fungsi Load Dataset
+# =========================
+def load_data(filepath):
+    try:
+        df = pd.read_csv(filepath, delimiter=';')
+        df.columns = df.columns.str.strip().str.lower()
+        if 'tanggal' not in df.columns:
+            st.error("Kolom 'tanggal' tidak ditemukan dalam file CSV.")
+            return None
+        df['tanggal'] = pd.to_datetime(df['tanggal'], dayfirst=True, errors='coerce')
+        df.dropna(subset=['tanggal'], inplace=True)
+        df.set_index('tanggal', inplace=True)
+        return df
+    except Exception as e:
+        st.error(f"Gagal membaca file data: {e}")
+        return None
 
-# Function to load machine learning model
+# =========================
+# Fungsi Load Model .pkl (Jika ada)
+# =========================
 def load_model(file_path):
     try:
         with open(file_path, 'rb') as model_in:
@@ -24,7 +37,9 @@ def load_model(file_path):
         st.error(f"Error loading the model: {e}")
         return None
 
-# Function to convert series to supervised learning format
+# =========================
+# Fungsi Series to Supervised
+# =========================
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     n_vars = 1 if isinstance(data, list) else data.shape[1]
     df = pd.DataFrame(data)
@@ -44,80 +59,91 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-# Function to plot original and forecasted data
+# =========================
+# Fungsi Plot
+# =========================
 def plot_forecast(df, forecast_df):
     for column in df.columns:
         fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
         fig.add_trace(go.Scatter(x=df.index, y=df[column], mode='lines', name='Historikal', line=dict(color='cyan')), row=1, col=1)
         fig.add_trace(go.Scatter(x=forecast_df.index, y=forecast_df[column], mode='lines', name='Prakiraan', 
                                  line=dict(color='magenta')), row=1, col=1)
-        
+
         if not df.empty and not forecast_df.empty:
             fig.add_trace(go.Scatter(x=[df.index[-1], forecast_df.index[0]],
                                      y=[df[column].iloc[-1], forecast_df[column].iloc[0]],
                                      mode='lines', line=dict(color='magenta'), showlegend=False), row=1, col=1)
-            
-            fig.update_layout(
-                title=f'Historikal vs Prakiraan {column}',
-                xaxis_title='Date',
-                yaxis_title=column,
-                xaxis=dict(
-                    rangeselector=dict(
-                        buttons=list([
-                            dict(count=1, label="1m", step="month", stepmode="backward"),
-                            dict(count=6, label="6m", step="month", stepmode="backward"),
-                            dict(step="all")
-                        ])
-                    ),
-                    rangeslider=dict(visible=True),
-                    type="date"
-                )
-            )
-            st.plotly_chart(fig, use_container_width=True)
 
+        fig.update_layout(
+            title=f'Historikal vs Prakiraan {column}',
+            xaxis_title='Tanggal',
+            yaxis_title=column,
+            xaxis=dict(
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+                rangeslider=dict(visible=True),
+                type="date"
+            )
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+# =========================
+# Fungsi Aplikasi Streamlit
+# =========================
 def app():
-    st.title('Haii....')
-    st.title('Anda sedang Berada di Bagian PRediksi Cuaca')
-    st.write("""Prediksi cuaca Kota Surabaya dapat diketahui berdasarkan permintaan Anda. Prediksi 
-                Menggunakan Algoritama Long Short Term Memory yang merupakan bagian dari Neural Network. 
-                Kami sertakan data histori cuaca Kota Surabaya dari tahun 2023 sebagai berikut.""")
+    st.title('⛅ Prediksi Cuaca Kota Surabaya Menggunakan LSTM')
+    st.write("""Prediksi cuaca Kota Surabaya menggunakan algoritma Long Short-Term Memory (LSTM) berdasarkan data histori cuaca tahun 2023.""")
 
     # Load data
     filepath = 'data/df_hujan.csv'
     df = load_data(filepath)
-    df['tanggal'] = pd.to_datetime(df['tanggal'], format='%Y-%m-%d')
-    df.set_index('tanggal', inplace=True)
+    if df is None:
+        return
 
-    # Load models
-    forecaster = keras_model('model/prediksi_cuaca_lstm_mls6.h5')
-
+    st.subheader("Data Historis Cuaca")
     st.dataframe(df, use_container_width=True)
 
-    if forecaster:
-        n_forecast_days = st.number_input('Silahkan mengisi jumlah hari yang ingin Anda prediksi', min_value=1, max_value=30, value=30)
+    # Load model
+    try:
+        forecaster = keras_model('model/prediksi_cuaca_lstm_mls6.h5')
+    except Exception as e:
+        st.error(f"Gagal memuat model LSTM: {e}")
+        return
 
-        if st.button('Prediksi'):
-            with st.spinner('Mohon menunggu sebentar yaaa...'):
-                scaler = MinMaxScaler()
-                df_scaled = scaler.fit_transform(df)
-                n_days = 3
-                n_features = df.shape[1]
-                test_data_supervised = series_to_supervised(df_scaled, n_days, 1)
-                test_data_sequences = test_data_supervised.values[:, :n_days * n_features]
+    # Input jumlah hari prediksi
+    n_forecast_days = st.number_input('Silakan isi jumlah hari yang ingin Anda prediksi:', min_value=1, max_value=30, value=7)
 
-                forecast = []
-                for i in range(n_forecast_days):
-                    seq = test_data_sequences[i].reshape((1, n_days, n_features))
-                    predicted = forecaster.predict(seq)
-                    forecast.append(predicted[0])
+    if st.button('Mulai Prediksi'):
+        with st.spinner('Mohon tunggu... sedang memproses prediksi...'):
+            scaler = MinMaxScaler()
+            df_scaled = scaler.fit_transform(df)
+            n_days = 3
+            n_features = df.shape[1]
 
-                forecast_array = np.array(forecast)
-                forecast_inverse = scaler.inverse_transform(forecast_array)
-                forecast_inverse = np.abs(forecast_inverse)
-                forecast_inverse = np.round(forecast_inverse, 2)
+            test_data_supervised = series_to_supervised(df_scaled, n_days, 1)
+            test_data_sequences = test_data_supervised.values[:, :n_days * n_features]
 
-                date_range = pd.date_range(start=df.index[-1], periods=n_forecast_days + 1)
-                forecast_df = pd.DataFrame(forecast_inverse, index=date_range[1:], columns=df.columns)
+            forecast = []
+            last_seq = test_data_sequences[-1].reshape((1, n_days, n_features))
 
-                st.subheader("Hasil Perkiraan Cuaca Menggunakan LSTM")
-                plot_forecast(df, forecast_df)
+            for _ in range(n_forecast_days):
+                pred = forecaster.predict(last_seq, verbose=0)
+                forecast.append(pred[0])
+                last_seq = np.append(last_seq[:, 1:, :], [[pred[0]]], axis=1)
+
+            forecast_array = np.array(forecast)
+            forecast_inverse = scaler.inverse_transform(forecast_array)
+            forecast_inverse = np.abs(forecast_inverse)
+            forecast_inverse = np.round(forecast_inverse, 2)
+
+            date_range = pd.date_range(start=df.index[-1] + pd.Timedelta(days=1), periods=n_forecast_days)
+            forecast_df = pd.DataFrame(forecast_inverse, index=date_range, columns=df.columns)
+
+            st.subheader("Hasil Perkiraan Cuaca")
+            st.dataframe(forecast_df)
+            plot_forecast(df, forecast_df)

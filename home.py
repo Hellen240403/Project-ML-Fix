@@ -14,7 +14,7 @@ def app():
 
     with st.expander("Pendahuluan"):
 
-        tab1, tab2, tab3, tab4 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
+        tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
 
         with tab1:
             st.info("""

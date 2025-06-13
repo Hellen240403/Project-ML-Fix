@@ -76,7 +76,7 @@ def plot_forecast(df, forecast_df):
 def app():
     st.title('Haii....')
     st.title('Anda sedang Berada di Bagian PRediksi Cuaca')
-    st.writer("""Prediksi cuaca Kota Surabaya dapat diketahui berdasarkan permintaan Anda. Prediksi 
+    st.write("""Prediksi cuaca Kota Surabaya dapat diketahui berdasarkan permintaan Anda. Prediksi 
                 Menggunakan Algoritama Long Short Term Memory yang merupakan bagian dari Neural Network. 
                 Kami sertakan data histori cuaca Kota Surabaya dari tahun 2023 sebagai berikut.""")
 

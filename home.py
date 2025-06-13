@@ -113,8 +113,8 @@ def app():
 
     # Load Dataset
     df = load_data("data/df_hujan.csv")
-    df['Tanggal'] = pd.to_datetime(df['Tanggal'])
-    df.set_index('Tanggal', inplace=True)
+    df['tanggal'] = pd.to_datetime(df['tanggal'])
+    df.set_index('tanggal', inplace=True)
 
     #Menampilkan data hujan
     st.divider()

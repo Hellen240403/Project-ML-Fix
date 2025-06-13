@@ -1,6 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+
+import PIL from Image
+
 import home as home, forecast, prediction, about
 
 st.set_page_config(
@@ -48,7 +51,7 @@ class MultiApp:
         if app == "Forecast":
             forecast.app()    
         if app == "Prediction":
-            predict.app()        
+            prediction.app()        
         if app == "About":
             about.app()     
              

@@ -13,9 +13,7 @@ def app():
     st.title("Platform Prediksi Cuaca Kota Surabaya :thunder_cloud_and_rain:")
 
     with st.expander("Pendahuluan"):
-
         tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
-
         with tab1:
             st.info("""
 	    Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer 
@@ -43,7 +41,6 @@ def app():
             tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan 
             untuk menghadapi ketidakpastian yang terjadi di masa depan.
 	    """)
-
         with tab2:
             st.info("""
 	    Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca 
@@ -63,7 +60,6 @@ def app():
             kecerdasan buatan di Indonesia, khususnya untuk meningkatkan kualitas peramalan cuaca di 
             wilayah perkotaan yang dinamis.
 	    """)
-
         with tab3:
             st.info("""
             Penelitian ini memberikan berbagai manfaat yang dapat diterapkan dalam bidang meteorologi 
@@ -89,7 +85,6 @@ def app():
             yang memiliki tantangan cuaca dan iklim yang spesifik, memberikan wawasan lebih dalam tentang b
             agaimana cuaca berkembang di kawasan tersebut.
             """)
-
     with st.expander("Metode"):
         st.write("""
             Neural Network (NN) adalah model komputasi yang terinspirasi oleh cara kerja otak 

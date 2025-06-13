@@ -13,4 +13,3 @@ tensorflow
 Pillow
 statsmodels
 catboost
-PIL

@@ -17,7 +17,8 @@ def app():
         tab1, tab2, tab3, tab4 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
 
         with tab1:
-            st.info("Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer 
+            st.info("""
+	    Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer 
             pada waktu tertentu di masa depan yang dilakukan dengan menganalisis data 
             meteorologi yang ada. Perkembangannya teknologi dan metode yang terus meningkat 
             membuat banyak pilihan untuk memprediksi cuaca dengan sangat canggih. Proses 
@@ -40,10 +41,12 @@ def app():
             penelitian khusus mengenai prediksi cuaca Kota Surabaya untuk meningkatkan kualitas 
             ramalan cuaca di daerah tersebut. Mengingat tantangan geografis dan dinamika cuaca 
             tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan 
-            untuk menghadapi ketidakpastian yang terjadi di masa depan.")
+            untuk menghadapi ketidakpastian yang terjadi di masa depan.
+	    """)
 
         with tab2:
-            st.info("Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca 
+            st.info("""
+	    Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca 
             yang akurat untuk Kota Surabaya dengan menggunakan metode Artificial Neural Network 
             (ANN) dan Long Short-Term Memory (LSTM) berdasarkan data cuaca terbaru. Adapaun tujuan 
             penelitian secara spesifik dijabarkan sebagai berikut. 
@@ -58,10 +61,11 @@ def app():
             Surabaya.
             4. Memberikan kontribusi dalam pengembangan model prediksi cuaca berbasis teknologi 
             kecerdasan buatan di Indonesia, khususnya untuk meningkatkan kualitas peramalan cuaca di 
-            wilayah perkotaan yang dinamis.")
+            wilayah perkotaan yang dinamis.
+	    """)
 
         with tab3:
-            st.info("
+            st.info("""
             Penelitian ini memberikan berbagai manfaat yang dapat diterapkan dalam bidang meteorologi 
             dan kehidupan sehari-hari, antara lain:
             1. Meningkatkan akurasi prediksi cuaca Kota Surabaya
@@ -84,10 +88,10 @@ def app():
             Penelitian ini dapat membantu memetakan pola cuaca di daerah tropis, khususnya di Surabaya, 
             yang memiliki tantangan cuaca dan iklim yang spesifik, memberikan wawasan lebih dalam tentang b
             agaimana cuaca berkembang di kawasan tersebut.
-            ")
+            """)
 
     with st.expander("Metode"):
-        st.write("
+        st.write("""
             Neural Network (NN) adalah model komputasi yang terinspirasi oleh cara kerja otak 
             manusia dalam memproses informasi. Salah satu varian dari NN adalah Artificial Neural 
             Network (ANN) yang telah terbukti efektif dalam memecahkan berbagai masalah termasuk 
@@ -107,7 +111,7 @@ def app():
             waktu. Kombinasi antara ANN dan LSTM memberikan potensi besar untuk meningkatkan 
             akurasi prediksi cuaca, terutama dalam situasi yang melibatkan banyak variabel yang 
             saling berinteraksi.
-        ")
+        """)
 
     # Load Dataset
     df = load_data("data/df_hujan.csv")

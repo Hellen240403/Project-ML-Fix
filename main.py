@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-import home as home, eda, forecast, prediction, about
+import home as home, forecast, prediction, about
 
 st.set_page_config(
     page_title="Dashboard"

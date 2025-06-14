@@ -107,66 +107,66 @@ def app():
         cloud_code = cloud_options[cloud_name]
 
     # --- Tombol Prediksi ---
-if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):
-    with st.spinner('🔍 Menganalisis cuaca...'):
-        time.sleep(1.5)  # Simulasi proses
-        results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
-
-    prediction = results["prediction"]
-    probability = results["probability"]
-    validity = results["validity"]
-    temp_category = results["temp_category"]
-
-    st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
+    if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):
+        with st.spinner('🔍 Menganalisis cuaca...'):
+            time.sleep(1.5)  # Simulasi proses
+            results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
+    
+        prediction = results["prediction"]
+        probability = results["probability"]
+        validity = results["validity"]
+        temp_category = results["temp_category"]
+    
+        st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
 
     # --- Tentukan Emoji & Warna Background Dinamis ---
-    prediction_lower = prediction.lower()
-    emoji = "🌤️"
-    bg_color = "#f0f2f6"  # default background
-
-    if "cerah" in prediction_lower:
-        emoji = "☀️"
-        bg_color = "#FFF7D6"
-    elif "berawan" in prediction_lower:
-        emoji = "☁️"
-        bg_color = "#E0E7FF"
-    elif "gerimis" in prediction_lower:
-        emoji = "🌦️"
-        bg_color = "#D0F0FF"
-    elif "hujan sedang" in prediction_lower:
-        emoji = "🌧️"
-        bg_color = "#B0DAFF"
-    elif "hujan lebat" in prediction_lower:
-        emoji = "⛈️"
-        bg_color = "#A3BFFA"
+        prediction_lower = prediction.lower()
+        emoji = "🌤️"
+        bg_color = "#f0f2f6"  # default background
+    
+        if "cerah" in prediction_lower:
+            emoji = "☀️"
+            bg_color = "#FFF7D6"
+        elif "berawan" in prediction_lower:
+            emoji = "☁️"
+            bg_color = "#E0E7FF"
+        elif "gerimis" in prediction_lower:
+            emoji = "🌦️"
+            bg_color = "#D0F0FF"
+        elif "hujan sedang" in prediction_lower:
+            emoji = "🌧️"
+            bg_color = "#B0DAFF"
+        elif "hujan lebat" in prediction_lower:
+            emoji = "⛈️"
+            bg_color = "#A3BFFA"
 
     # --- Hasil Prediksi dalam Kartu Stylish ---
-    st.markdown(f"""
-    <div style='
-        background-color: {bg_color};
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        margin-bottom: 1.5rem;
-    '>
-        <h1 style='text-align: center; font-size: 3rem;'>{emoji} {prediction}</h1>
-        <p style='text-align: center; font-size: 1.1rem;'>Prediksi cuaca berdasarkan input parameter yang Anda masukkan.</p>
-        <div style='display: flex; justify-content: space-around; padding-top: 1rem;'>
-            <div style='text-align: center;'>
-                <h3>📊 Probabilitas</h3>
-                <p style='font-size: 1.5rem; font-weight: bold;'>{probability}</p>
-            </div>
-            <div style='text-align: center;'>
-                <h3>✅ Kevalidan</h3>
-                <p style='font-size: 1.5rem; font-weight: bold;'>{validity}%</p>
+        st.markdown(f"""
+        <div style='
+            background-color: {bg_color};
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        '>
+            <h1 style='text-align: center; font-size: 3rem;'>{emoji} {prediction}</h1>
+            <p style='text-align: center; font-size: 1.1rem;'>Prediksi cuaca berdasarkan input parameter yang Anda masukkan.</p>
+            <div style='display: flex; justify-content: space-around; padding-top: 1rem;'>
+                <div style='text-align: center;'>
+                    <h3>📊 Probabilitas</h3>
+                    <p style='font-size: 1.5rem; font-weight: bold;'>{probability}</p>
+                </div>
+                <div style='text-align: center;'>
+                    <h3>✅ Kevalidan</h3>
+                    <p style='font-size: 1.5rem; font-weight: bold;'>{validity}%</p>
+                </div>
             </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     # --- Detail Parameter Input dengan Emoji ---
-    st.markdown("#### 📌 Detail Parameter yang Diberikan:")
-    st.markdown(f"""
+        st.markdown("#### 📌 Detail Parameter yang Diberikan:")
+        st.markdown(f"""
     - 🌡️ **Temperatur:** `{temperature}°C` ({temp_category})  
     - 💧 **Kelembapan:** `{humidity}%`  
     - 🌬️ **Kecepatan Angin:** `{wind_speed} km/jam`  
@@ -174,7 +174,7 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
     """)
 
     # --- Tips Tambahan Jika Hujan ---
-    if "hujan" in prediction_lower:
-        st.info("💡 *Tips*: Jangan lupa bawa payung atau jas hujan ya!")
-
-    st.success("✅ Prediksi berhasil ditampilkan dengan tampilan interaktif!")
+        if "hujan" in prediction_lower:
+            st.info("💡 *Tips*: Jangan lupa bawa payung atau jas hujan ya!")
+    
+        st.success("✅ Prediksi berhasil ditampilkan dengan tampilan interaktif!")

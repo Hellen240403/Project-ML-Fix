@@ -46,13 +46,22 @@ def load_data(file_path, index_col=None):
 # Fungsi utama
 def app():
     set_custom_css()
-
+    
+    st.image("asset/home.png", use_container_width=True)
+    
     col1, col2 = st.columns([1, 1.2])
 
     with col1:
-        st.markdown('<div class="weather-box">', unsafe_allow_html=True)
-        st.subheader("📍 Cuaca Surabaya Hari Ini")
-        st.image("asset/home.png", use_container_width=True)
+        st.markdown("""
+        <div style="
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        ">
+            <h3 style='color: #094067; margin: 0;'>📍 Cuaca Surabaya Hari Ini</h3>
+        </div>
+        """, unsafe_allow_html=True)
         st.write("🌤️ Suhu: 29°C  \n💧 Kelembapan: 78%  \n💨 Angin: 26 km/h  \n🌞 UV: Ekstrem")
         st.caption("Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
         st.markdown('</div>', unsafe_allow_html=True)

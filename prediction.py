@@ -154,7 +154,7 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
     st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
 
     # --- Tentukan Emoji & Warna Background Dinamis ---
-        prediction_lower = prediction.lower()
+    prediction_lower = prediction.lower()
         emoji = "🌤️"
         bg_color = "#f0f2f6"  # default background
     

@@ -2,12 +2,13 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 
-# Tambahkan CSS untuk tampilan stylish
+# ---------------------------- CSS Styling ----------------------------
 def set_custom_css():
     st.markdown("""
         <style>
         .stApp {
             background: linear-gradient(to bottom right, #e0f7fa, #e0f2fe);
+            font-family: 'Segoe UI', sans-serif;
         }
         .big-logo img {
             width: 90%;
@@ -27,10 +28,13 @@ def set_custom_css():
             font-weight: bold;
             border-radius: 10px;
         }
+        .metric {
+            font-size: 18px !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
-# Fungsi untuk load data
+# ---------------------------- Data Loader ----------------------------
 def load_data(file_path, index_col=None):
     try:
         df = pd.read_csv(file_path, index_col=index_col, sep=';')
@@ -43,39 +47,44 @@ def load_data(file_path, index_col=None):
         st.error(f"❌ Gagal memuat data: {e}")
         return None
 
-# Fungsi utama
+# ---------------------------- Main App ----------------------------
 def app():
     set_custom_css()
-    
+
     st.image("asset/home.png", use_container_width=True)
-    st.title("Platform Prediksi Cuaca Surabaya")
-    
-    col1, col2 = st.columns([1, 1.2])
+    st.title("🌦️ Platform Prediksi Cuaca Surabaya")
+
+    col1, col2 = st.columns([1, 1.3])
 
     with col1:
         st.markdown("""
-        <div style="
-            background-color: #f0f3fa;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-        ">
+        <div style="background-color: #f0f3fa; padding: 20px; border-radius: 12px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
             <h3 style='color: #000000; margin: 0;'>📍 Cuaca Surabaya Hari Ini</h3>
         </div>
         """, unsafe_allow_html=True)
-        
+
     with col2:
-        st.write("🌤️ Suhu: 29°C  \n💧 Kelembapan: 78%  \n💨 Angin: 26 km/h  \n🌞 UV: Ekstrem")
-        st.caption("Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class='weather-box'>
+            <ul>
+                <li>🌡️ <b>Suhu:</b> 29°C</li>
+                <li>💧 <b>Kelembapan:</b> 78%</li>
+                <li>🌬️ <b>Angin:</b> 26 km/h</li>
+                <li>🌞 <b>UV:</b> Ekstrem</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
 
     with st.expander("📘 Pendahuluan", expanded=True):
-        tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
+        tab1, tab2, tab3 = st.tabs(["📖 Latar Belakang", "🎯 Tujuan", "🎁 Manfaat"])
+
         with tab1:
             st.info("""
             Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer pada waktu tertentu di masa depan yang dilakukan dengan menganalisis data meteorologi yang ada. Perkembangannya teknologi dan metode yang terus membuat banyak pilihan untuk memprediksi cuaca dengan sangat canggih. Proses ini melibatkan penggunaan berbagai metode statistika dan algoritma pemrograman untuk memodelkan dinamika atmosfer. Berbagai parameter cuaca seperti suhu, kelembapan, tekanan udara, kecepatan angin, dan curah hujan digunakan untuk membuat ramalan cuaca yang dapat memberikan informasi kepada masyarakat untuk kegiatan sehari-hari. Dalam era teknologi yang semakin maju, prediksi menjadi lebih akurat dan dapat diakses dengan mudah melalui berbagai platform digital, memberikan kemudahan bagi masyarakat dalam merencanakan aktivitas mereka.
             Kota Surabaya merupakan salah satu kota metropolitan dan kota besar di Indonesia dengan berbagai aktivitas ekonomi, sosial, dan budaya yang sangat tinggi. Aktifitas masyarakat Kota Surabaya sangat padat pada jam tertentu karena kegiatan yang dilakukan secara bersama. Masyarakat dituntut untuk terus waspada terhadap kondisi sekitar lingkungannya agar beraktifitas dengan aman. Cuaca menjadi sangat penting diperhatikan oleh masyarakat karna kondisi yang tidak menentu setiap waktunya. Oleh karena itu, informasi prediksi cuaca yang akurat sangat penting untuk mendukung keberlangsungan aktivitas tersebut. Kondisi tersebut menjadi pemicu untuk melakukan penelitian khusus mengenai prediksi cuaca Kota Surabaya untuk meningkatkan kualitas ramalan cuaca di daerah tersebut. Mengingat tantangan geografis dan dinamika cuaca tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan untuk menghadapi ketidakpastian yang terjadi di masa depan.
             """)
+
         with tab2:
             st.success("""
             Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca yang akurat untuk Kota Surabaya dengan menggunakan metode Artificial Neural Network (ANN) dan Long Short-Term Memory (LSTM) berdasarkan data cuaca terbaru. Adapun tujuan penelitian secara spesifik dijabarkan sebagai berikut. 
@@ -84,6 +93,7 @@ def app():
             3. Menilai akurasi model prediksi yang dibangun dengan membandingkan hasil prediksi dari ANN dan LSTM untuk memastikan metode yang paling sesuai digunakan untuk prediksi cuaca Kota Surabaya.                
             4. Memberikan kontribusi dalam pengembangan model prediksi cuaca berbasis teknologi kecerdasan buatan di Indonesia, khususnya untuk meningkatkan kualitas peramalan cuaca di wilayah perkotaan yang dinamis.
             """)
+        
         with tab3:
             st.warning("""
             Penelitian ini memberikan berbagai manfaat yang dapat diterapkan dalam bidang meteorologi dan kehidupan sehari-hari, antara lain:
@@ -94,20 +104,19 @@ def app():
             5. Peningkatan pemahaman tentang pola cuaca tropis penelitian ini dapat membantu memetakan pola cuaca di daerah tropis, khususnya di Surabaya, yang memiliki tantangan cuaca dan iklim yang spesifik, memberikan wawasan lebih dalam tentang bagaimana cuaca berkembang di kawasan tersebut.
             """)
 
-    with st.expander("🧠 Metode"):
+    with st.expander("🧠 Metode"): 
         st.markdown("""
-        - **Artificial Neural Network (ANN)**: Mengenali pola
-        - **Long Short-Term Memory (LSTM)**: Memproses data sekuensial cuaca            
+        - 🤖 **Artificial Neural Network (ANN)**: Mengenali pola data non-linear
+        - 🔁 **Long Short-Term Memory (LSTM)**: Menangani data sekuensial cuaca jangka panjang
         """)
 
-    # Load data cuaca historis
     df = load_data("data/df_hujan.csv")
     if df is not None:
         st.divider()
         st.subheader("📊 Data Cuaca Surabaya (2023–2025)")
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, use_container_width=True, height=350)
         st.caption("📌 Sumber: [BMKG](https://dataonline.bmkg.go.id/home)")
 
-# Jalankan
+# ---------------------------- Run App ----------------------------
 if __name__ == "__main__":
     app()

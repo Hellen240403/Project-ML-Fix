@@ -119,7 +119,7 @@ def app():
         
 # Tambahkan emotikon berdasarkan hasil prediksi
         emoji = ""
-        prediction = prediction if 'prediction' in locals() else ""
+        prediction_lower = prediction.lower()
     
         if "cerah" in prediction_lower:
             emoji = "☀️"

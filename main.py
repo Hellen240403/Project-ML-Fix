@@ -36,18 +36,14 @@ class MultiApp:
                 icons=['house', 'activity', 'alt', 'info-circle-fill'],
                 menu_icon='bi-cast',
                 default_index=0,
-                st.markdown("""
-                    <style>
-                    /* Ubah warna teks menu saat hover */
-                    .nav-link:hover {
-                        color: black !important;
-                    }
-                    </style>
-                """, unsafe_allow_html=True)
                 styles={
                     "container": {"padding": "5!important", "background-color": '#081f5c'},
                     "icon": {"color": "white", "font-size": "23px"},
                     "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px", "--hover-color": "#a7ebf2"},
+                    .nav-link:hover {
+                        background-color: #a7ebf2 !important;
+                        color: black !important;
+                    }
                     "nav-link-selected": {"background-color": "#02ab21"},
                 }
             )

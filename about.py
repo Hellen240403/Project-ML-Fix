@@ -17,77 +17,97 @@ def app():
 
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
+# --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
 with tab1:
-    col1, col2 = st.columns([1, 2], gap="medium")
+    col1, col2 = st.columns([1.2, 1.8], gap="medium")  # beri ruang lebih untuk gambar
+
     with col1:
-        # Ganti dengan URL atau path ke foto Dwi
-        st.image("https://i.imgur.com/FBLf82s.jpeg", caption="Dwi Ilham Ramadhany", use_container_width=True)
+        try:
+            st.image(
+                "https://i.imgur.com/FBLf82s.jpeg",
+                caption="Dwi Ilham Ramadhany",
+                use_container_width=True,
+            )
+        except Exception as e:
+            st.warning(f"Gagal memuat gambar: {e}")
 
     with col2:
-        st.subheader(" Dwi Ilham Ramadhany ")
-        st.markdown(" Bangkalan, 7 November 2003 ")
-        st.markdown(" 2043221054 ")
-        
-        st.markdown("---")  # Garis pemisah
-        
+        st.subheader("Dwi Ilham Ramadhany")
+        st.markdown("**Tempat, Tanggal Lahir:** Bangkalan, 7 November 2003")
+        st.markdown("**NIM:** 2043221054")
+
+        st.markdown("---")
+
         st.markdown("#### Motivasi")
-        st.info("""
-        "Investasikanlah kesehatanmu selama mungkin."
-        """)
-        
-        st.markdown("---")  # Garis pemisah
-        
+        st.info("Investasikanlah kesehatanmu selama mungkin.")
+
+        st.markdown("---")
+
         st.markdown("#### Kontak")
         st.markdown("📧 dwrmdhany11@gmail.com")
 
 
     # --- KONTEN TAB 2: HELLEN ALDENIA ROVI ---
-    with tab2:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            # Ganti dengan URL atau path ke foto Hellen
-            st.image("https://i.imgur.com/eBf23v8.jpeg", caption="Hellen Aldenia Rovi", use_column_width=True)
+with tab2:
+    col1, col2 = st.columns([1.2, 1.8], gap="medium")  # beri ruang lebih untuk gambar
 
-        with col2:
-            st.subheader("Hellen Aldenia Rovi")
+    with col1:
+        try:
+            st.image(
+                "https://i.imgur.com/FBLf82s.jpeg",
+                caption="Hellen Aldenia Rovi",
+                use_container_width=True,
+            )
+        except Exception as e:
+            st.warning(f"Gagal memuat gambar: {e}")
+
+    with col2:
+        st.subheader("Hellen Aldenia Rovi")
             st.markdown("**Tempat, Tanggal Lahir:** Surabaya, 24 Agustus 2003")
             st.markdown("**NIM:** 2043221045")
-            
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Motivasi")
-            st.info("""
+
+        st.markdown("---")
+
+        st.markdown("#### Motivasi")
+        st.info("""
             "Mengubah pola yang kompleks menjadi cerita yang sederhana dan dapat ditindaklanjuti adalah keajaiban sejati dari statistika."
             """)
 
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Kontak")
-            st.markdown("📧 hellenaldenia@gmail.com")
+        st.markdown("---")
+
+        st.markdown("#### Kontak")
+        st.markdown("📧 hellenaldenia@gmail.com")
 
     # --- KONTEN TAB 3: ENDITA PRASTYANSYACH ---
     with tab3:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            # Ganti dengan URL atau path ke foto Endita
-            st.image("https://i.imgur.com/j4oXWqg.jpeg", caption="Endita Prastyansyach", use_column_width=True)
+    col1, col2 = st.columns([1.2, 1.8], gap="medium")  # beri ruang lebih untuk gambar
 
-        with col2:
-            st.subheader("Endita Prastyansyach")
+    with col1:
+        try:
+            st.image(
+                "https://i.imgur.com/FBLf82s.jpeg",
+                caption="Endita Prastyansyach",
+                use_container_width=True,
+            )
+        except Exception as e:
+            st.warning(f"Gagal memuat gambar: {e}")
+
+    with col2:
+        st.subheader("Endita Prastyansyach")
             st.markdown("**Tempat, Tanggal Lahir:** Sidoarjo, 10 Januari 2004")
             st.markdown("**NIM:** 2043221145")
-            
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Motivasi")
-            st.info("""
+
+        st.markdown("---")
+
+        st.markdown("#### Motivasi")
+        st.info("""
             "Tujuannya adalah membangun sistem cerdas yang tidak hanya memprediksi masa depan, tetapi juga membantu kita menciptakan masa depan yang lebih baik."
             """)
 
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Kontak")
-            st.markdown("📧 enditapras@gmail.com")
+        st.markdown("---")
+
+        st.markdown("#### Kontak")
+        st.markdown("📧 enditapras@gmail.com")
 
     st.subheader("Data Variabel")
     st.markdown("""

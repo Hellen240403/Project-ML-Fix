@@ -21,7 +21,7 @@ def app():
 
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
     with tab1:
-        col1, col2 = st.columns([1, 1.8], gap="medium")
+        col1, col2 = st.columns([1.8, 1.2], gap="large")
         with col1:
             try:
                 st.image(

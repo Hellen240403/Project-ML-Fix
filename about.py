@@ -59,10 +59,14 @@ def app():
             st.subheader("Hellen Aldenia Rovi")
             st.markdown("**Tempat, Tanggal Lahir :** Surabaya, 24 Agustus 2003")
             st.markdown("**NRP :** 2043221045")
-            st.markdown("---")
+            
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+            
             st.markdown("#### Motivasi")
             st.info("Mengubah pola yang kompleks menjadi cerita yang sederhana dan dapat ditindaklanjuti adalah keajaiban sejati dari statistika.")
-            st.markdown("---")
+
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+            
             st.markdown("#### Kontak")
             st.markdown("📧 hellenaldenia@gmail.com")
 
@@ -80,10 +84,14 @@ def app():
             st.subheader("Endita Prastyansyach")
             st.markdown("**Tempat, Tanggal Lahir :** Sidoarjo, 10 Januari 2004")
             st.markdown("**NRP :** 2043221145")
-            st.markdown("---")
+            
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+            
             st.markdown("#### Motivasi")
             st.info("Tujuannya adalah membangun sistem cerdas yang tidak hanya memprediksi masa depan, tetapi juga membantu kita menciptakan masa depan yang lebih baik.")
-            st.markdown("---")
+            
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+            
             st.markdown("#### Kontak")
             st.markdown("📧 enditapras@gmail.com")
 

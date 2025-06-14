@@ -142,16 +142,16 @@ cloud_code = cloud_options[cloud_name]["code"]
 
     # --- Tombol Prediksi ---
     if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):
-        with st.spinner('🔍 Menganalisis cuaca...'):
-            time.sleep(1.5)  # Simulasi proses
-            results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
-    
-        prediction = results["prediction"]
-        probability = results["probability"]
-        validity = results["validity"]
-        temp_category = results["temp_category"]
-    
-        st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
+    with st.spinner('🔍 Menganalisis cuaca...'):
+        time.sleep(1.5)  # Simulasi proses
+        results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
+
+    prediction = results["prediction"]
+    probability = results["probability"]
+    validity = results["validity"]
+    temp_category = results["temp_category"]
+
+    st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
 
     # --- Tentukan Emoji & Warna Background Dinamis ---
         prediction_lower = prediction.lower()

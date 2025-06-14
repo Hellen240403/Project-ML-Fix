@@ -158,24 +158,24 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
     emoji = "🌤️"
     bg_color = "#f0f2f6"  # default background
     
-        if "cerah" in prediction_lower:
-            emoji = "☀️"
-            bg_color = "#FFF7D6"
-        elif "berawan" in prediction_lower:
-            emoji = "☁️"
-            bg_color = "#E0E7FF"
-        elif "gerimis" in prediction_lower:
-            emoji = "🌦️"
-            bg_color = "#D0F0FF"
-        elif "hujan sedang" in prediction_lower:
-            emoji = "🌧️"
-            bg_color = "#B0DAFF"
-        elif "hujan lebat" in prediction_lower:
-            emoji = "⛈️"
-            bg_color = "#A3BFFA"
+    if "cerah" in prediction_lower:
+        emoji = "☀️"
+        bg_color = "#FFF7D6"
+    elif "berawan" in prediction_lower:
+        emoji = "☁️"
+        bg_color = "#E0E7FF"
+    elif "gerimis" in prediction_lower:
+        emoji = "🌦️"
+        bg_color = "#D0F0FF"
+    elif "hujan sedang" in prediction_lower:
+        emoji = "🌧️"
+        bg_color = "#B0DAFF"
+    elif "hujan lebat" in prediction_lower:
+        emoji = "⛈️"
+        bg_color = "#A3BFFA"
 
     # --- Hasil Prediksi dalam Kartu Stylish ---
-        st.markdown(f"""
+    st.markdown(f"""
         <div style='
             background-color: {bg_color};
             padding: 2rem;
@@ -199,8 +199,8 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
         """, unsafe_allow_html=True)
 
     # --- Detail Parameter Input dengan Emoji ---
-        st.markdown("#### 📌 Detail Parameter yang Diberikan:")
-        st.markdown(f"""
+    st.markdown("#### 📌 Detail Parameter yang Diberikan:")
+    st.markdown(f"""
     - 🌡️ **Temperatur:** `{temperature}°C` ({temp_category})  
     - 💧 **Kelembapan:** `{humidity}%`  
     - 🌬️ **Kecepatan Angin:** `{wind_speed} km/jam`  
@@ -208,7 +208,7 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
     """)
 
     # --- Tips Tambahan Jika Hujan ---
-        if "hujan" in prediction_lower:
-            st.info("💡 *Tips*: Jangan lupa bawa payung atau jas hujan ya!")
+    if "hujan" in prediction_lower:
+        st.info("💡 *Tips*: Jangan lupa bawa payung atau jas hujan ya!")
     
-        st.success("✅ Prediksi berhasil ditampilkan dengan tampilan interaktif!")
+    st.success("✅ Prediksi berhasil ditampilkan dengan tampilan interaktif!")

@@ -2,76 +2,85 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 
-# ===== Styling CSS =====
-st.markdown("""
-    <style>
-    /* Background gradien */
-    .stApp {
-        background: linear-gradient(135deg, #89f7fe, #66a6ff);
-        color: #000000;
-    }
+# Tambahkan CSS untuk tampilan stylish
+def set_custom_css():
+    st.markdown("""
+        <style>
+        .stApp {
+            background: linear-gradient(to bottom right, #e0f7fa, #e0f2fe);
+        }
+        .big-logo img {
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+        .weather-box {
+            background-color: #ffffffcc;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stTabs [data-baseweb="tab"] {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-    /* Judul besar dengan bayangan */
-    .big-title {
-        font-size: 3em;
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        margin-top: 20px;
-        color: #ffffff;
-    }
-
-    /* Card box untuk info */
-    .info-box {
-        background-color: rgba(255,255,255,0.8);
-        padding: 20px;
-        border-radius: 16px;
-        margin-top: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# ===== Gambar Besar =====
-try:
-    logomain = Image.open("asset/home.png")
-    st.image(logomain, use_container_width=True)
-except Exception as e:
-    st.warning(f"Gagal memuat gambar: {e}")
-
-# ===== Judul & Deskripsi =====
-st.markdown('<div class="big-title">🌤️ Prediksi Cuaca Kota Surabaya</div>', unsafe_allow_html=True)
-
-with st.container():
-    st.markdown('<div class="info-box">', unsafe_allow_html=True)
-    st.write("""
-        Selamat datang di platform prediksi cuaca Kota Surabaya!  
-        Aplikasi ini menggunakan teknologi Machine Learning (ANN & LSTM) berbasis data dari BMKG 
-        untuk memberikan prediksi cuaca yang akurat.  
-        🌧️☀️🌬️🌈  
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# ===== Load Data Cuaca =====
-@st.cache_data
-def load_data():
+# Fungsi untuk load data
+def load_data(file_path, index_col=None):
     try:
-        df = pd.read_csv("data/df_hujan.csv", sep=";")
+        df = pd.read_csv(file_path, index_col=index_col, sep=';')
         df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
         return df
+    except FileNotFoundError:
+        st.error(f"❌ File '{file_path}' tidak ditemukan.")
+        return None
     except Exception as e:
-        st.error(f"❌ Gagal memuat data cuaca: {e}")
+        st.error(f"❌ Gagal memuat data: {e}")
         return None
 
-df = load_data()
-if df is not None:
-    st.markdown('<div class="info-box">', unsafe_allow_html=True)
-    st.subheader("📊 Data Cuaca Surabaya 2023–2025")
-    st.dataframe(df, use_container_width=True)
-    st.caption("📌 Data diperoleh dari BMKG: https://dataonline.bmkg.go.id/home")
-    st.markdown('</div>', unsafe_allow_html=True)
-else:
-    st.stop()
+# Fungsi utama
+def app():
+    set_custom_css()
+
+    col1, col2 = st.columns([1, 1.2])
+
+    with col1:
+        st.markdown('<div class="weather-box">', unsafe_allow_html=True)
+        st.subheader("📍 Cuaca Surabaya Hari Ini")
+        st.image("asset/home.png", use_container_width=True)
+        st.write("🌤️ Suhu: 29°C  \n💧 Kelembapan: 78%  \n💨 Angin: 26 km/h  \n🌞 UV: Ekstrem")
+        st.caption("Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.title("Platform Prediksi Cuaca Surabaya")
+        with st.expander("📘 Pendahuluan", expanded=True):
+            tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
+            with tab1:
+                st.info("Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer...")
+            with tab2:
+                st.success("Tujuan dari penelitian ini adalah membangun model prediksi cuaca menggunakan ANN dan LSTM...")
+            with tab3:
+                st.warning("Penelitian ini bermanfaat untuk meningkatkan akurasi prediksi cuaca dan kesiapsiagaan...")
+
+        with st.expander("🧠 Metode"):
+            st.markdown("""
+            - **Artificial Neural Network (ANN)**: mengenali pola
+            - **Long Short-Term Memory (LSTM)**: memproses data sekuensial cuaca
+            """)
+
+    # Load data cuaca historis
+    df = load_data("data/df_hujan.csv")
+    if df is not None:
+        st.divider()
+        st.subheader("📊 Data Cuaca Surabaya (2023–2025)")
+        st.dataframe(df, use_container_width=True)
+        st.caption("📌 Sumber: [BMKG](https://dataonline.bmkg.go.id/home)")
 
 # Jalankan
 if __name__ == "__main__":

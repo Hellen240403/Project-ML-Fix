@@ -25,7 +25,7 @@ class MultiApp:
         # Sidebar
         with st.sidebar:
             try:
-                logomain = Image.open("asset/home.png")
+                logomain = Image.open("asset/sidebar.png")
                 st.image(logomain)
             except Exception as e:
                 st.warning(f"Gagal memuat logo: {e}")

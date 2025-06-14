@@ -25,7 +25,7 @@ def app():
         with col1:
             try:
                 st.image(
-                    "https://i.imgur.com/FBLf82s.jpeg",
+                    "asset/IMG_4105.jpg",
                     caption="Dwi Ilham Ramadhany",
                     use_container_width=True,
                 )

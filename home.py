@@ -94,11 +94,11 @@ def app():
             5. Peningkatan pemahaman tentang pola cuaca tropis penelitian ini dapat membantu memetakan pola cuaca di daerah tropis, khususnya di Surabaya, yang memiliki tantangan cuaca dan iklim yang spesifik, memberikan wawasan lebih dalam tentang bagaimana cuaca berkembang di kawasan tersebut.
             """)
 
-        with st.expander("🧠 Metode"):
-            st.markdown("""
-            - **Artificial Neural Network (ANN)**: Mengenali pola
-            - **Long Short-Term Memory (LSTM)**: Memproses data sekuensial cuaca
-            """)
+    with st.expander("🧠 Metode"):
+        st.markdown("""
+        - **Artificial Neural Network (ANN)**: Mengenali pola
+        - **Long Short-Term Memory (LSTM)**: Memproses data sekuensial cuaca            
+        """)
 
     # Load data cuaca historis
     df = load_data("data/df_hujan.csv")

@@ -28,6 +28,7 @@ def app():
                 img = Image.open("asset/IMG_4105.JPG")
                 img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
                 st.image(img, caption="Dwi Ilham Ramadhany", use_container_width=True)
+                img = Image.open("asset/awan.png")
             except Exception as e:
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:

@@ -25,11 +25,15 @@ def app():
         tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
 
         with tab1:
-            st.info("Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer ...")
+            st.info("""
+            Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer pada waktu tertentu di masa depan yang dilakukan dengan menganalisis data meteorologi yang ada. Perkembangannya teknologi dan metode yang terus membuat banyak pilihan untuk memprediksi cuaca dengan sangat canggih. Proses ini melibatkan penggunaan berbagai metode statistika dan algoritma pemrograman untuk memodelkan dinamika atmosfer. Berbagai parameter cuaca seperti suhu, kelembapan, tekanan udara, kecepatan angin, dan curah hujan digunakan untuk membuat ramalan cuaca yang dapat memberikan informasi kepada masyarakat untuk kegiatan sehari-hari. Dalam era teknologi yang semakin maju, prediksi menjadi lebih akurat dan dapat diakses dengan mudah melalui berbagai platform digital, memberikan kemudahan bagi masyarakat dalam merencanakan aktivitas mereka. Kota Surabaya merupakan salah satu kota metropolitan dan kota besar di Indonesia dengan berbagai aktivitas ekonomi, sosial, dan budaya yang sangat tinggi. Aktifitas masyarakat Kota Surabaya sangat padat pada jam tertentu karena kegiatan yang dilakukan secara bersama. Masyarakat dituntut untuk terus waspada terhadap kondisi sekitar lingkungannya agar beraktifitas dengan aman. Cuaca menjadi sangat penting diperhatikan oleh masyarakat karna kondisi yang tidak menentu setiap waktunya. Oleh karena itu, informasi prediksi cuaca yang akurat sangat penting untuk mendukung keberlangsungan aktivitas tersebut. Kondisi tersebut menjadi pemicu untuk melakukan penelitian khusus mengenai prediksi cuaca Kota Surabaya untuk meningkatkan kualitas ramalan cuaca di daerah tersebut. Mengingat tantangan geografis dan dinamika cuaca tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan untuk menghadapi ketidakpastian yang terjadi di masa depan.
+            """)
         with tab2:
-            st.info("Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca ...")
+            st.info("Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca 
+            ")
         with tab3:
-            st.info("Penelitian ini memberikan berbagai manfaat ...")
+            st.info("Penelitian ini memberikan berbagai manfaat 
+            ")
 
     with st.expander("Metode"):
         st.write("Neural Network (NN) adalah model komputasi yang terinspirasi oleh cara kerja otak ...")

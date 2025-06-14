@@ -45,12 +45,23 @@ class MultiApp:
                 icons=['house', 'activity', 'alt', 'info-circle-fill'],
                 menu_icon='bi-cast',
                 default_index=0,
-                styles={
-                    "container": {"padding": "5!important", "background-color": '#081f5c'},
-                    "icon": {"color": "white", "font-size": "23px"},
-                    "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px"},
-                    "nav-link-selected": {"background-color": "#02ab21"},
-                }
+                selected = option_menu(
+                    menu_title=None,
+                    options=["Home", "Forecast", "Predict", "About"],
+                    icons=["house", "cloud-sun", "cloud", "info-circle"],
+                    orientation="horizontal",
+                    styles={
+                        "container": {"padding": "5!important", "background-color": "#081f5c"},
+                        "icon": {"color": "white", "font-size": "23px"},
+                        "nav-link": {
+                            "color": "white",
+                            "font-size": "20px",
+                            "text-align": "left",
+                            "margin": "0px",
+                        },
+                        "nav-link-selected": {"background-color": "#02ab21"},
+                    }
+                )
             )
 
         # Menu routing

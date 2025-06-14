@@ -78,33 +78,63 @@ def get_weather_prediction(temperature, humidity, wind_speed, cloud_code):
 
 def app():
     st.title("Prediksi Cuaca Berbasis Aturan 🌦️")
-    st.markdown("Masukkan parameter cuaca untuk mendapatkan prediksi berdasarkan sistem berbasis aturan.")
-    
-    st.divider()
+    st.markdown("## ☁️ Masukkan Parameter Cuaca")
+    st.markdown("Lengkapi data berikut untuk memprediksi cuaca berdasarkan parameter atmosfer dan jenis awan yang dipilih:")
 
     # --- Input dari Pengguna ---
     col1, col2 = st.columns(2)
     with col1:
-        temperature = st.number_input('Masukkan Nilai Temperatur (°C)', min_value=-10.0, max_value=50.0, value=24.0, format="%.1f")
-        humidity = st.number_input('Masukkan Nilai Kelembapan (%)', min_value=0.0, max_value=100.0, value=90.0, format="%.1f")
+        temperature = st.slider(
+            '🌡️ Temperatur (°C)',
+            min_value=-10.0,
+            max_value=50.0,
+            value=24.0,
+            step=0.5,
+            help="Geser untuk mengatur suhu udara"
+        )
+    
+        humidity = st.slider(
+            '💧 Kelembapan Udara (%)',
+            min_value=0.0,
+            max_value=100.0,
+            value=90.0,
+            step=1.0,
+            help="Kelembapan relatif di udara"
+        )
     
     with col2:
-        wind_speed = st.number_input('Masukkan Nilai Kecepatan Angin (km/jam)', min_value=0.0, max_value=100.0, value=25.0, format="%.1f")
-        
-        cloud_options = {
-            "Cumulus": 1,
-            "Cirrus": 2,
-            "Stratus": 3,
-            "Nimbostratus": 4,
-            "Cumulonimbus": 5
-        }
-        
-        cloud_name = st.selectbox(
-            "Pilih Jenis Awan",
-            options=cloud_options.keys(),
-            index=3  # Default ke Nimbostratus sesuai contoh
+        wind_speed = st.slider(
+            '🌬️ Kecepatan Angin (km/jam)',
+            min_value=0.0,
+            max_value=100.0,
+            value=25.0,
+            step=1.0,
+            help="Kecepatan angin di permukaan"
         )
-        cloud_code = cloud_options[cloud_name]
+    
+        st.markdown("### 🖼️ Pilih Jenis Awan")
+    
+        # Dictionary gambar awan
+        cloud_options = {
+            "Cumulus": {"code": 1, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/CumulusCloud.jpg/320px-CumulusCloud.jpg"},
+            "Cirrus": {"code": 2, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cirrus_clouds2.jpg/320px-Cirrus_clouds2.jpg"},
+            "Stratus": {"code": 3, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Stratus_clouds_over_Beacon_Hill.jpg/320px-Stratus_clouds_over_Beacon_Hill.jpg"},
+            "Nimbostratus": {"code": 4, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nimbostratus_Clouds.jpg/320px-Nimbostratus_Clouds.jpg"},
+            "Cumulonimbus": {"code": 5, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cumulonimbus_over_Lake_Victoria.jpg/320px-Cumulonimbus_over_Lake_Victoria.jpg"},
+        }
+    
+        # Tampilkan dalam bentuk radio dengan gambar
+        cloud_name = st.radio(
+            "📸 Klik salah satu gambar awan berikut untuk memilih:",
+            options=list(cloud_options.keys()),
+            format_func=lambda x: f"🌥️ {x}",
+            horizontal=True
+        )
+    
+    # Tampilkan gambar awan yang dipilih
+    st.image(cloud_options[cloud_name]["img"], caption=f"Jenis Awan: {cloud_name}", width=500, use_column_width="auto")
+    
+    cloud_code = cloud_options[cloud_name]["code"]
 
     # --- Tombol Prediksi ---
     if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):

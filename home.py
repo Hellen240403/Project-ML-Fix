@@ -48,20 +48,19 @@ def app():
     if df is None:
         st.stop()
 
-    # Validasi kolom tanggal
-    if 'tanggal' not in df.columns:
-        st.error(f"❌ Kolom 'tanggal' tidak ditemukan! Kolom tersedia: {df.columns.tolist()}")
-        st.stop()
-
-    # Format tanggal: DD/MM/YYYY
+    def load_data(file_path, index_col=None):
     try:
-        df['tanggal'] = pd.to_datetime(df['tanggal'], format='%d/%m/%Y', errors='coerce')
-        if df['tanggal'].isna().all():
-            st.error("⚠️ Semua nilai 'tanggal' gagal dikonversi. Cek format tanggalnya (harus DD/MM/YYYY).")
-            st.stop()
+        df = pd.read_csv(file_path, sep=';', index_col=index_col)
+    except FileNotFoundError:
+        st.error(f"❌ File '{file_path}' tidak ditemukan.")
+        return None
     except Exception as e:
-        st.error(f"⚠️ Gagal mengonversi tanggal: {e}")
-        st.stop()
+        st.error(f"❌ Gagal memuat data: {e}")
+        return None
+
+    # Bersihkan nama kolom
+    df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
+    return df
 
     df.set_index('tanggal', inplace=True)
 

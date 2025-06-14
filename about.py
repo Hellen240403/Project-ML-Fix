@@ -16,8 +16,6 @@ def app():
     tab1, tab2, tab3 = st.tabs(["Dwi Ilham Ramadhany", "Hellen Aldenia Rovi", "Endita Prastyansyach"])
 
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
-    # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
-# --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
 with tab1:
     col1, col2 = st.columns([1.2, 1.8], gap="medium")  # beri ruang lebih untuk gambar
 

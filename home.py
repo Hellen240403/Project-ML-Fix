@@ -48,9 +48,9 @@ def app():
     if df is None:
         st.stop()
 
-    def load_data(file_path, index_col=None):
+def load_data(file_path, index_col=None):
     try:
-        df = pd.read_csv(file_path, sep=';', index_col=index_col)
+        df = pd.read_csv(file_path, index_col=index_col, sep=';')  # gunakan delimiter ;
     except FileNotFoundError:
         st.error(f"❌ File '{file_path}' tidak ditemukan.")
         return None
@@ -61,8 +61,6 @@ def app():
     # Bersihkan nama kolom
     df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
     return df
-
-    df.set_index('tanggal', inplace=True)
 
     # Tampilkan data
     st.divider()

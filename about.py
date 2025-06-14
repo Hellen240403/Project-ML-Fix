@@ -61,8 +61,8 @@ with tab2:
 
     with col2:
         st.subheader("Hellen Aldenia Rovi")
-            st.markdown("**Tempat, Tanggal Lahir:** Surabaya, 24 Agustus 2003")
-            st.markdown("**NIM:** 2043221045")
+        st.markdown("**Tempat, Tanggal Lahir:** Surabaya, 24 Agustus 2003")
+        st.markdown("**NIM:** 2043221045")
 
         st.markdown("---")
 
@@ -92,8 +92,8 @@ with tab2:
 
     with col2:
         st.subheader("Endita Prastyansyach")
-            st.markdown("**Tempat, Tanggal Lahir:** Sidoarjo, 10 Januari 2004")
-            st.markdown("**NIM:** 2043221145")
+        st.markdown("**Tempat, Tanggal Lahir:** Sidoarjo, 10 Januari 2004")
+        st.markdown("**NIM:** 2043221145")
 
         st.markdown("---")
 

@@ -13,3 +13,4 @@ tensorflow
 Pillow
 statsmodels
 catboost
+folium

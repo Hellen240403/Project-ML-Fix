@@ -81,16 +81,16 @@ def app():
     st.markdown("## ☁️ Masukkan Parameter Cuaca")
     st.markdown("Lengkapi data berikut untuk memprediksi cuaca berdasarkan parameter atmosfer dan jenis awan yang dipilih:")
 
-# Dictionary gambar awan
+# --- Pilihan Jenis Awan + Gambar ---
     cloud_options = {
         "Cumulus": {"code": 1, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/CumulusCloud.jpg/320px-CumulusCloud.jpg"},
         "Cirrus": {"code": 2, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cirrus_clouds2.jpg/320px-Cirrus_clouds2.jpg"},
         "Stratus": {"code": 3, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Stratus_clouds_over_Beacon_Hill.jpg/320px-Stratus_clouds_over_Beacon_Hill.jpg"},
-         "Nimbostratus": {"code": 4, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nimbostratus_Clouds.jpg/320px-Nimbostratus_Clouds.jpg"},
-          "Cumulonimbus": {"code": 5, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cumulonimbus_over_Lake_Victoria.jpg/320px-Cumulonimbus_over_Lake_Victoria.jpg"},
+        "Nimbostratus": {"code": 4, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nimbostratus_Clouds.jpg/320px-Nimbostratus_Clouds.jpg"},
+        "Cumulonimbus": {"code": 5, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cumulonimbus_over_Lake_Victoria.jpg/320px-Cumulonimbus_over_Lake_Victoria.jpg"},
     }
     
-    # --- Input dari Pengguna ---
+    # --- Input Pengguna ---
     col1, col2 = st.columns(2)
     
     with col1:
@@ -102,7 +102,6 @@ def app():
             step=0.5,
             help="Geser untuk mengatur suhu udara"
         )
-    
         humidity = st.slider(
             '💧 Kelembapan Udara (%)',
             min_value=0.0,
@@ -123,8 +122,6 @@ def app():
         )
     
         st.markdown("### 🖼️ Pilih Jenis Awan")
-    
-        # Tampilkan dalam bentuk radio dengan gambar
         cloud_name = st.radio(
             "📸 Klik salah satu gambar awan berikut untuk memilih:",
             options=list(cloud_options.keys()),
@@ -132,80 +129,67 @@ def app():
             horizontal=True
         )
     
-    # Tampilkan gambar awan yang dipilih
-st.image(
-    cloud_options[cloud_name]["img"], 
-    caption=f"Jenis Awan: {cloud_name}", 
-    use_container_width=True
-)
-cloud_code = cloud_options[cloud_name]["code"]
-
-    # --- Tombol Prediksi ---
-if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):
-    with st.spinner('🔍 Menganalisis cuaca...'):
-        time.sleep(1.5)  # Simulasi proses
-        results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
-
-    prediction = results["prediction"]
-    probability = results["probability"]
-    validity = results["validity"]
-    temp_category = results["temp_category"]
-
-    st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
-
-    # --- Tentukan Emoji & Warna Background Dinamis ---
-    prediction_lower = prediction.lower()
-    emoji = "🌤️"
-    bg_color = "#f0f2f6"  # default background
+    # --- Gambar Awan yang Dipilih ---
+    st.image(
+        cloud_options[cloud_name]["img"],
+        caption=f"☁️ Jenis Awan: {cloud_name}",
+        use_container_width=True
+    )
     
-    if "cerah" in prediction_lower:
-        emoji = "☀️"
-        bg_color = "#FFF7D6"
-    elif "berawan" in prediction_lower:
-        emoji = "☁️"
-        bg_color = "#E0E7FF"
-    elif "gerimis" in prediction_lower:
-        emoji = "🌦️"
-        bg_color = "#D0F0FF"
-    elif "hujan sedang" in prediction_lower:
-        emoji = "🌧️"
-        bg_color = "#B0DAFF"
-    elif "hujan lebat" in prediction_lower:
-        emoji = "⛈️"
-        bg_color = "#A3BFFA"
-
-    # --- Hasil Prediksi dalam Kartu Stylish ---
-    st.markdown(f"""
-        <div style='
-            background-color: {bg_color};
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
-        '>
-            <h1 style='text-align: center; font-size: 3rem;'>{emoji} {prediction}</h1>
-            <p style='text-align: center; font-size: 1.1rem;'>Prediksi cuaca berdasarkan input parameter yang Anda masukkan.</p>
-            <div style='display: flex; justify-content: space-around; padding-top: 1rem;'>
-                <div style='text-align: center;'>
-                    <h3>📊 Probabilitas</h3>
-                    <p style='font-size: 1.5rem; font-weight: bold;'>{probability}</p>
-                </div>
-                <div style='text-align: center;'>
-                    <h3>✅ Kevalidan</h3>
-                    <p style='font-size: 1.5rem; font-weight: bold;'>{validity}%</p>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # --- Detail Parameter Input dengan Emoji ---
-    st.markdown("#### 📌 Detail Parameter yang Diberikan:")
-    st.markdown(f"""
-    - 🌡️ **Temperatur:** `{temperature}°C` ({temp_category})  
-    - 💧 **Kelembapan:** `{humidity}%`  
-    - 🌬️ **Kecepatan Angin:** `{wind_speed} km/jam`  
-    - ☁️ **Jenis Awan:** `{cloud_name}`
-    """)
+    cloud_code = cloud_options[cloud_name]["code"]
+    
+    # --- Tombol Prediksi Cuaca ---
+    if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):
+        with st.spinner('🔍 Menganalisis cuaca...'):
+            time.sleep(1.5)  # Simulasi
+    
+            # Ganti dengan model prediksi milik Anda
+            results = get_weather_prediction(temperature, humidity, wind_speed, cloud_code)
+    
+        prediction = results["prediction"]
+        probability = results["probability"]
+        validity = results["validity"]
+        temp_category = results["temp_category"]
+    
+        st.markdown("### 🌤️ Hasil Prediksi Cuaca Hari Ini")
+    
+        # Tambahkan emoji sesuai hasil prediksi
+        emoji = "🌤️"
+        prediction_lower = prediction.lower()
+        if "cerah" in prediction_lower:
+            emoji = "☀️"
+        elif "berawan" in prediction_lower:
+            emoji = "☁️"
+        elif "gerimis" in prediction_lower:
+            emoji = "🌦️"
+        elif "hujan sedang" in prediction_lower:
+            emoji = "🌧️"
+        elif "hujan lebat" in prediction_lower:
+            emoji = "⛈️"
+    
+        col_res1, col_res2, col_res3 = st.columns(3)
+    
+        with col_res1:
+            if "hujan" in prediction_lower or "gerimis" in prediction_lower:
+                st.error(f"**{emoji} {prediction}**")
+            elif "berawan" in prediction_lower:
+                st.warning(f"**{emoji} {prediction}**")
+            else:
+                st.success(f"**{emoji} {prediction}**")
+    
+        with col_res2:
+            st.metric("📊 Probabilitas", value=probability)
+    
+        with col_res3:
+            st.metric("✅ Kevalidan", value=f"{validity}%")
+    
+        st.caption(f"""
+        📌 **Detail input**:  
+        🌡️ Temperatur: **{temperature}°C** ({temp_category})  
+        💧 Kelembapan: **{humidity}%**  
+        🌬️ Kecepatan Angin: **{wind_speed} km/jam**  
+        ☁️ Awan: **{cloud_name}**
+        """)
 
     # --- Tips Tambahan Jika Hujan ---
     if "hujan" in prediction_lower:

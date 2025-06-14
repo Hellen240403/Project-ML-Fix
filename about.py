@@ -32,8 +32,8 @@ def app():
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:
             st.subheader("Dwi Ilham Ramadhany")
-            st.markdown("**Tempat, Tanggal Lahir:** Bangkalan, 7 November 2003")
-            st.markdown("**NIM:** 2043221054")
+            st.markdown("**Tempat, Tanggal Lahir :** Bangkalan, 7 November 2003")
+            st.markdown("**NRP :** 2043221054")
             st.markdown("---")
             st.markdown("#### Motivasi")
             st.info("Investasikanlah kesehatanmu selama mungkin.")
@@ -46,17 +46,15 @@ def app():
         col1, col2 = st.columns([1.2, 1.8], gap="medium")
         with col1:
             try:
-                st.image(
-                    "https://i.imgur.com/FBLf82s.jpeg",
-                    caption="Hellen Aldenia Rovi",
-                    use_container_width=True,
-                )
+                img = Image.open("asset/IMG_4105.JPG")
+                img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
+                st.image(img, caption="Hellen Aldenia Rovi", use_container_width=True)
             except Exception as e:
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:
             st.subheader("Hellen Aldenia Rovi")
-            st.markdown("**Tempat, Tanggal Lahir:** Surabaya, 24 Agustus 2003")
-            st.markdown("**NIM:** 2043221045")
+            st.markdown("**Tempat, Tanggal Lahir :** Surabaya, 24 Agustus 2003")
+            st.markdown("**NRP :** 2043221045")
             st.markdown("---")
             st.markdown("#### Motivasi")
             st.info("Mengubah pola yang kompleks menjadi cerita yang sederhana dan dapat ditindaklanjuti adalah keajaiban sejati dari statistika.")
@@ -69,17 +67,15 @@ def app():
         col1, col2 = st.columns([1.2, 1.8], gap="medium")
         with col1:
             try:
-                st.image(
-                    "https://i.imgur.com/FBLf82s.jpeg",
-                    caption="Endita Prastyansyach",
-                    use_container_width=True,
-                )
+                img = Image.open("asset/IMG_4105.JPG")
+                img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
+                st.image(img, caption="Endita Prastyansyach", use_container_width=True)
             except Exception as e:
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:
             st.subheader("Endita Prastyansyach")
-            st.markdown("**Tempat, Tanggal Lahir:** Sidoarjo, 10 Januari 2004")
-            st.markdown("**NIM:** 2043221145")
+            st.markdown("**Tempat, Tanggal Lahir :** Sidoarjo, 10 Januari 2004")
+            st.markdown("**NRP :** 2043221145")
             st.markdown("---")
             st.markdown("#### Motivasi")
             st.info("Tujuannya adalah membangun sistem cerdas yang tidak hanya memprediksi masa depan, tetapi juga membantu kita menciptakan masa depan yang lebih baik.")

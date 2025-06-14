@@ -22,7 +22,7 @@ def app():
 
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
     with tab1:
-        col1, col2 = st.columns([1.8, 1.2], gap="large")
+        col1, col2 = st.columns([1.2, 1.8], gap="medium")
         with col1:
             try:
                 img = Image.open("asset/IMG_4105.JPG")

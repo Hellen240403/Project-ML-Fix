@@ -4,7 +4,7 @@ from PIL import Image
 def app():
     st.title("SkyWard Team")
 
-    st.header("About We")
+    st.header("Tentang Kami")
     st.markdown("""
         Segenap mahasiswa Departemen Statistika Bisnis Angkatan 2022 yang sedang mengambil
         mata kuliah Machine Learning. Sebuah mata kuliah yang memperdalam ilmu kami dalam dunia 

@@ -75,4 +75,4 @@ else:
 
 # Jalankan
 if __name__ == "__main__":
-    app(
+    app()

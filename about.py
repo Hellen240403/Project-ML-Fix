@@ -34,12 +34,14 @@ def app():
             st.subheader("Dwi Ilham Ramadhany")
             st.markdown("**Tempat, Tanggal Lahir :** Bangkalan, 7 November 2003")
             st.markdown("**NRP :** 2043221054")
+            
             st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
-            st.markdown("---")
+
             st.markdown("#### Motivasi")
             st.info("Investasikanlah kesehatanmu selama mungkin.")
+            
             st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
-            st.markdown("---")
+
             st.markdown("#### Kontak")
             st.markdown("📧 dwrmdhany11@gmail.com")
 

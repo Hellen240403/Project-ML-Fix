@@ -70,6 +70,7 @@ def app():
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
         ">
             <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">
                 <li>🌡️ <b>Suhu:</b> 29°C</li>
@@ -79,6 +80,7 @@ def app():
             </ul>
         </div>
         """, unsafe_allow_html=True)
+        
         st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
 
     with st.expander("📘 Pendahuluan", expanded=True):

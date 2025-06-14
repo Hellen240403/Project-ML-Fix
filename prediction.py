@@ -118,25 +118,24 @@ def app():
         st.subheader("✅ Hasil Prediksi Cuaca")
         
         # Tampilkan hasil dalam layout kolom
-        # Tampilkan hasil dalam layout kolom
-res_col1, res_col2, res_col3 = st.columns(3)
+    res_col1, res_col2, res_col3 = st.columns(3)
 
 # Tambahkan emotikon berdasarkan hasil prediksi
-emoji = ""
-prediction_lower = prediction.lower()
+    emoji = ""
+    prediction = prediction if 'prediction' in locals() else ""
 
-if "cerah" in prediction_lower:
-    emoji = "☀️"
-elif "berawan" in prediction_lower:
-    emoji = "☁️"
-elif "gerimis" in prediction_lower:
-    emoji = "🌦️"
-elif "hujan sedang" in prediction_lower:
-    emoji = "🌧️"
-elif "hujan lebat" in prediction_lower:
-    emoji = "⛈️"
-else:
-    emoji = "🌤️"  # Default: cuaca cerah berawan
+    if "cerah" in prediction_lower:
+        emoji = "☀️"
+    elif "berawan" in prediction_lower:
+        emoji = "☁️"
+    elif "gerimis" in prediction_lower:
+        emoji = "🌦️"
+    elif "hujan sedang" in prediction_lower:
+        emoji = "🌧️"
+    elif "hujan lebat" in prediction_lower:
+        emoji = "⛈️"
+        else:
+            emoji = "🌤️"  # Default: cuaca cerah berawan
 
 with res_col1:
     if "hujan" in prediction_lower or "gerimis" in prediction_lower:

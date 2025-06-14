@@ -118,20 +118,45 @@ def app():
         st.subheader("✅ Hasil Prediksi Cuaca")
         
         # Tampilkan hasil dalam layout kolom
-        res_col1, res_col2, res_col3 = st.columns(3)
-        
-        with res_col1:
-            if "Hujan" in prediction or "Gerimis" in prediction:
-                st.error(f"**{prediction}**")
-            elif "Berawan" in prediction:
-                st.warning(f"**{prediction}**")
-            else:
-                st.success(f"**{prediction}**")
-        
-        with res_col2:
-            st.metric(label="Probabilitas", value=probability)
-            
-        with res_col3:
-            st.metric(label="Tingkat Kevalidan", value=f"{validity}%")
-            
-        st.caption(f"Detail input: Temperatur {temperature}°C ({temp_category}), Kelembapan {humidity}%, Kecepatan Angin {wind_speed} km/jam, Awan {cloud_name}.")
+        # Tampilkan hasil dalam layout kolom
+res_col1, res_col2, res_col3 = st.columns(3)
+
+# Tambahkan emotikon berdasarkan hasil prediksi
+emoji = ""
+prediction_lower = prediction.lower()
+
+if "cerah" in prediction_lower:
+    emoji = "☀️"
+elif "berawan" in prediction_lower:
+    emoji = "☁️"
+elif "gerimis" in prediction_lower:
+    emoji = "🌦️"
+elif "hujan sedang" in prediction_lower:
+    emoji = "🌧️"
+elif "hujan lebat" in prediction_lower:
+    emoji = "⛈️"
+else:
+    emoji = "🌤️"  # Default: cuaca cerah berawan
+
+with res_col1:
+    if "hujan" in prediction_lower or "gerimis" in prediction_lower:
+        st.error(f"**{emoji} {prediction}**")
+    elif "berawan" in prediction_lower:
+        st.warning(f"**{emoji} {prediction}**")
+    else:
+        st.success(f"**{emoji} {prediction}**")
+
+with res_col2:
+    st.metric(label="📊 Probabilitas", value=probability)
+
+with res_col3:
+    st.metric(label="✅ Tingkat Kevalidan", value=f"{validity}%")
+
+# Detail input dengan penambahan emoji agar lebih informatif
+st.caption(f"""
+📌 **Detail input**:  
+🌡️ Temperatur: **{temperature}°C** ({temp_category})  
+💧 Kelembapan: **{humidity}%**  
+🌬️ Kecepatan Angin: **{wind_speed} km/jam**  
+☁️ Awan: **{cloud_name}**
+""")

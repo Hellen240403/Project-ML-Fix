@@ -50,7 +50,7 @@ def app():
         col1, col2 = st.columns([1.2, 1.8], gap="medium")
         with col1:
             try:
-                img = Image.open("asset/IMG_4105.JPG")
+                img = Image.open("asset/IMG_3428_11zon.jpg")
                 img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
                 st.image(img, caption="Hellen Aldenia Rovi", use_container_width=True)
             except Exception as e:

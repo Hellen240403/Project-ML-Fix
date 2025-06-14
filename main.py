@@ -29,6 +29,15 @@ class MultiApp:
                 st.image(logomain)
             except Exception as e:
                 st.warning(f"Gagal memuat logo: {e}")
+
+            st.markdown("""
+                <style>
+                .nav-link:hover {
+                    background-color: #a7ebf2 !important;
+                    color: black !important;
+                }
+                </style>
+            """, unsafe_allow_html=True)
             
             app = option_menu(
                 menu_title='Dashboard',
@@ -40,10 +49,6 @@ class MultiApp:
                     "container": {"padding": "5!important", "background-color": '#081f5c'},
                     "icon": {"color": "white", "font-size": "23px"},
                     "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px"},
-                    "nav-link":"hover" {
-                        "background-color": "#a7ebf2",
-                        "color": "black"
-                    },
                     "nav-link-selected": {"background-color": "#02ab21"},
                 }
             )

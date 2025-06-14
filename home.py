@@ -48,6 +48,7 @@ def app():
     set_custom_css()
     
     st.image("asset/home.png", use_container_width=True)
+    st.title("Platform Prediksi Cuaca Surabaya")
     
     col1, col2 = st.columns([1, 1.2])
 
@@ -59,7 +60,7 @@ def app():
             border-radius: 12px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         ">
-            <h3 style='color: #094067; margin: 0;'>📍 Cuaca Surabaya Hari Ini</h3>
+            <h3 style='color: #d9d9d9; margin: 0;'>📍 Cuaca Surabaya Hari Ini</h3>
         </div>
         """, unsafe_allow_html=True)
         st.write("🌤️ Suhu: 29°C  \n💧 Kelembapan: 78%  \n💨 Angin: 26 km/h  \n🌞 UV: Ekstrem")
@@ -67,7 +68,6 @@ def app():
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.title("Platform Prediksi Cuaca Surabaya")
         with st.expander("📘 Pendahuluan", expanded=True):
             tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
             with tab1:

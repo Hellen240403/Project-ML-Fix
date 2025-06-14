@@ -19,6 +19,11 @@ def load_data(file_path, index_col=None):
     return df
 
 def app():
+    try:
+        image = Image.open("asset/weather_header.png")  # Ganti dengan nama file gambar kamu
+        st.image(image, use_column_width=True)
+    except Exception as e:
+        st.warning(f"Gagal memuat gambar header: {e}")
     st.title("Platform Prediksi Cuaca Kota Surabaya :thunder_cloud_and_rain:")
 
     with st.expander("Pendahuluan"):

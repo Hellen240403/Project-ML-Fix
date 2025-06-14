@@ -66,7 +66,6 @@ def app():
     with col2:
         st.markdown("""
         <div style="
-            background-color: rgba(255, 255, 255, 0.6);
             border-radius: 18px;
             padding: 20px;
             margin-bottom: 5px;
@@ -82,7 +81,6 @@ def app():
         """, unsafe_allow_html=True)
         
         st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
-
 
     with st.expander("📘 Pendahuluan", expanded=True):
         tab1, tab2, tab3 = st.tabs(["📖 Latar Belakang", "🎯 Tujuan", "🎁 Manfaat"])

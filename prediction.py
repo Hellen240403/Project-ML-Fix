@@ -156,7 +156,7 @@ if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primar
     # --- Tentukan Emoji & Warna Background Dinamis ---
     prediction_lower = prediction.lower()
     emoji = "🌤️"
-        bg_color = "#f0f2f6"  # default background
+    bg_color = "#f0f2f6"  # default background
     
         if "cerah" in prediction_lower:
             emoji = "☀️"

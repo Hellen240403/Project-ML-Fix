@@ -29,15 +29,6 @@ class MultiApp:
                 st.image(logomain)
             except Exception as e:
                 st.warning(f"Gagal memuat logo: {e}")
-
-            st.markdown("""
-                <style>
-                .nav-link:hover {
-                    background-color: #a7ebf2 !important;
-                    color: black !important;
-                }
-                </style>
-            """, unsafe_allow_html=True)
             
             app = option_menu(
                 menu_title='Dashboard',

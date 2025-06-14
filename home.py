@@ -72,3 +72,7 @@ if df is not None:
     st.markdown('</div>', unsafe_allow_html=True)
 else:
     st.stop()
+
+# Jalankan
+if __name__ == "__main__":
+    app(

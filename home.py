@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from PIL import Image
 
 # Fungsi load data
 def load_data(file_path, index_col=None):

@@ -28,18 +28,17 @@ def app():
                 img = Image.open("asset/IMG_4105.JPG")
                 img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
                 st.image(img, caption="Dwi Ilham Ramadhany", use_container_width=True)
-                awan = Image.open("asset/awan.png")
-                awan_resized = awan.resize((120, 120))  # Sesuaikan ukuran
-                st.image(awan_resized, caption="Awan", width=120)
             except Exception as e:
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:
             st.subheader("Dwi Ilham Ramadhany")
             st.markdown("**Tempat, Tanggal Lahir :** Bangkalan, 7 November 2003")
             st.markdown("**NRP :** 2043221054")
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
             st.markdown("---")
             st.markdown("#### Motivasi")
             st.info("Investasikanlah kesehatanmu selama mungkin.")
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
             st.markdown("---")
             st.markdown("#### Kontak")
             st.markdown("📧 dwrmdhany11@gmail.com")

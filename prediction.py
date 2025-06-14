@@ -81,6 +81,15 @@ def app():
     st.markdown("## ☁️ Masukkan Parameter Cuaca")
     st.markdown("Lengkapi data berikut untuk memprediksi cuaca berdasarkan parameter atmosfer dan jenis awan yang dipilih:")
 
+# Dictionary gambar awan
+    cloud_options = {
+        "Cumulus": {"code": 1, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/CumulusCloud.jpg/320px-CumulusCloud.jpg"},
+        "Cirrus": {"code": 2, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cirrus_clouds2.jpg/320px-Cirrus_clouds2.jpg"},
+        "Stratus": {"code": 3, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Stratus_clouds_over_Beacon_Hill.jpg/320px-Stratus_clouds_over_Beacon_Hill.jpg"},
+         "Nimbostratus": {"code": 4, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nimbostratus_Clouds.jpg/320px-Nimbostratus_Clouds.jpg"},
+          "Cumulonimbus": {"code": 5, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cumulonimbus_over_Lake_Victoria.jpg/320px-Cumulonimbus_over_Lake_Victoria.jpg"},
+    }
+    
     # --- Input dari Pengguna ---
     col1, col2 = st.columns(2)
     
@@ -114,15 +123,6 @@ def app():
         )
     
         st.markdown("### 🖼️ Pilih Jenis Awan")
-    
-        # Dictionary gambar awan
-        cloud_options = {
-            "Cumulus": {"code": 1, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/CumulusCloud.jpg/320px-CumulusCloud.jpg"},
-            "Cirrus": {"code": 2, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cirrus_clouds2.jpg/320px-Cirrus_clouds2.jpg"},
-            "Stratus": {"code": 3, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Stratus_clouds_over_Beacon_Hill.jpg/320px-Stratus_clouds_over_Beacon_Hill.jpg"},
-            "Nimbostratus": {"code": 4, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nimbostratus_Clouds.jpg/320px-Nimbostratus_Clouds.jpg"},
-            "Cumulonimbus": {"code": 5, "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cumulonimbus_over_Lake_Victoria.jpg/320px-Cumulonimbus_over_Lake_Victoria.jpg"},
-        }
     
         # Tampilkan dalam bentuk radio dengan gambar
         cloud_name = st.radio(

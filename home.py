@@ -1,12 +1,46 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from PIL import Image
 
-# Fungsi untuk load data
+# CSS untuk latar belakang gradasi dan layout modern
+def set_custom_css():
+    st.markdown("""
+        <style>
+        /* Background gradasi dan font */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .stApp {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #f0f9ff 100%);
+            background-attachment: fixed;
+        }
+        /* Ukuran dan style gambar logo */
+        .custom-logo img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+            border-radius: 20px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+        /* Tabs lebih modern */
+        .stTabs [data-baseweb="tab"] {
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            padding: 10px;
+            margin-right: 10px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+# Fungsi untuk load data CSV
 def load_data(file_path, index_col=None):
     try:
-        df = pd.read_csv(file_path, index_col=index_col, sep=';')  # delimiter ;
+        df = pd.read_csv(file_path, index_col=index_col, sep=';')
+        df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
+        return df
     except FileNotFoundError:
         st.error(f"❌ File '{file_path}' tidak ditemukan.")
         return None
@@ -14,28 +48,22 @@ def load_data(file_path, index_col=None):
         st.error(f"❌ Gagal memuat data: {e}")
         return None
 
-    df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
-    return df
-
-# Fungsi utama
+# Fungsi utama aplikasi
 def app():
-    # Tampilan logo
+    set_custom_css()
+
+    # Gambar utama besar di tengah
     try:
-        logomain = Image.open("asset/home.png")
-        st.image(logomain, width=200)
+        st.markdown('<div class="custom-logo">', unsafe_allow_html=True)
+        st.image("asset/home.png", use_column_width=False)
+        st.markdown('</div>', unsafe_allow_html=True)
     except Exception as e:
         st.warning(f"Gagal memuat logo: {e}")
 
-    st.title("🌦️ Platform Prediksi Cuaca Kota Surabaya")
-    st.markdown(
-        "<style>div.block-container{padding-top:2rem; padding-bottom:2rem;} .stTabs [data-baseweb='tab']{background:#f0f2f6;border-radius:10px;padding:10px}</style>",
-        unsafe_allow_html=True,
-    )
+    st.title("🌤️ Platform Prediksi Cuaca Kota Surabaya")
 
-    # Tab Pendahuluan
     with st.expander("📘 Pendahuluan", expanded=True):
         tab1, tab2, tab3 = st.tabs(["Latar Belakang", "Tujuan", "Manfaat"])
-
         with tab1:
             st.info("""Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer pada waktu tertentu di masa depan yang dilakukan dengan menganalisis data meteorologi yang ada. Perkembangannya teknologi dan metode yang terus membuat banyak pilihan untuk memprediksi cuaca dengan sangat canggih. Proses ini melibatkan penggunaan berbagai metode statistika dan algoritma pemrograman untuk memodelkan dinamika atmosfer. Berbagai parameter cuaca seperti suhu, kelembapan, tekanan udara, kecepatan angin, dan curah hujan digunakan untuk membuat ramalan cuaca yang dapat memberikan informasi kepada masyarakat untuk kegiatan sehari-hari. Dalam era teknologi yang semakin maju, prediksi menjadi lebih akurat dan dapat diakses dengan mudah melalui berbagai platform digital, memberikan kemudahan bagi masyarakat dalam merencanakan aktivitas mereka. Kota Surabaya merupakan salah satu kota metropolitan dan kota besar di Indonesia dengan berbagai aktivitas ekonomi, sosial, dan budaya yang sangat tinggi. Aktifitas masyarakat Kota Surabaya sangat padat pada jam tertentu karena kegiatan yang dilakukan secara bersama. Masyarakat dituntut untuk terus waspada terhadap kondisi sekitar lingkungannya agar beraktifitas dengan aman. Cuaca menjadi sangat penting diperhatikan oleh masyarakat karna kondisi yang tidak menentu setiap waktunya. Oleh karena itu, informasi prediksi cuaca yang akurat sangat penting untuk mendukung keberlangsungan aktivitas tersebut. Kondisi tersebut menjadi pemicu untuk melakukan penelitian khusus mengenai prediksi cuaca Kota Surabaya untuk meningkatkan kualitas ramalan cuaca di daerah tersebut. Mengingat tantangan geografis dan dinamika cuaca tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan untuk menghadapi ketidakpastian yang terjadi di masa depan.""")
         with tab2:
@@ -55,24 +83,20 @@ def app():
             4. Kontribusi terhadap penelitian meteorologi berbasis kecerdasan buatan penelitian ini juga memberikan kontribusi dalam pengembangan model-model prediksi cuaca berbasis kecerdasan buatan (AI), memperkenalkan pendekatan ANN dan LSTM sebagai alat yang efektif dalam analisis data cuaca yang dinamis.
             5. Peningkatan pemahaman tentang pola cuaca tropis penelitian ini dapat membantu memetakan pola cuaca di daerah tropis, khususnya di Surabaya, yang memiliki tantangan cuaca dan iklim yang spesifik, memberikan wawasan lebih dalam tentang bagaimana cuaca berkembang di kawasan tersebut.
             """)
-    # Metode
+
     with st.expander("🧠 Metode"):
         st.markdown("""
-            - **ANN** (Artificial Neural Network): Menggunakan jaringan syaraf tiruan untuk mengenali pola cuaca.
-            - **LSTM** (Long Short-Term Memory): Mampu mengingat tren jangka panjang dan sangat cocok untuk prediksi waktu.
+        - **ANN** (Artificial Neural Network): Menggunakan jaringan syaraf tiruan untuk mengenali pola cuaca.
+        - **LSTM** (Long Short-Term Memory): Mampu mengingat tren jangka panjang dan sangat cocok untuk prediksi waktu.
         """)
 
-    # Load dan tampilkan data
     df = load_data("data/df_hujan.csv")
-    if df is None:
-        return
+    if df is not None:
+        st.divider()
+        st.subheader("📊 Data Cuaca Tahun 2023–2025")
+        st.dataframe(df, use_container_width=True)
+        st.caption("📌 Sumber: [BMKG](https://dataonline.bmkg.go.id/home)")
 
-    st.divider()
-    st.subheader("📊 Data Cuaca Tahun 2023-2025")
-    st.dataframe(df, use_container_width=True)
-
-    st.caption("📌 Sumber: [BMKG](https://dataonline.bmkg.go.id/home)")
-
-# Panggil fungsi saat file dijalankan
+# Jalankan aplikasi
 if __name__ == "__main__":
     app()

@@ -39,11 +39,11 @@ class MultiApp:
                 styles={
                     "container": {"padding": "5!important", "background-color": '#081f5c'},
                     "icon": {"color": "white", "font-size": "23px"},
-                    "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px", "--hover-color": "#a7ebf2"},
-                    .nav-link:hover {
-                        background-color: #a7ebf2 !important;
-                        color: black !important;
-                    }
+                    "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px"},
+                    "nav-link":"hover" {
+                        "background-color": "#a7ebf2",
+                        "color": "black"
+                    },
                     "nav-link-selected": {"background-color": "#02ab21"},
                 }
             )

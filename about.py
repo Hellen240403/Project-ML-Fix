@@ -16,28 +16,29 @@ def app():
     tab1, tab2, tab3 = st.tabs(["Dwi Ilham Ramadhany", "Hellen Aldenia Rovi", "Endita Prastyansyach"])
 
     # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
-    with tab1:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            # Ganti dengan URL atau path ke foto Dwi
-            st.image("https://i.imgur.com/FBLf82s.jpeg", caption="Dwi Ilham Ramadhany", use_column_width=True)
+    # --- KONTEN TAB 1: DWI ILHAM RAMADHANY ---
+with tab1:
+    col1, col2 = st.columns([1, 2], gap="medium")
+    with col1:
+        # Ganti dengan URL atau path ke foto Dwi
+        st.image("https://i.imgur.com/FBLf82s.jpeg", caption="Dwi Ilham Ramadhany", use_container_width=True)
 
-        with col2:
-            st.subheader(" Dwi Ilham Ramadhany ")
-            st.markdown(" Bangkalan, 7 November 2003 ")
-            st.markdown(" 2043221054 ")
-            
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Motivasi")
-            st.info("""
-            "Investasikanlah kesehatanmu selama mungkin."
-            """)
-            
-            st.markdown("---") # Garis pemisah
-            
-            st.markdown("#### Kontak")
-            st.markdown("📧 dwrmdhany11@gmail.com")
+    with col2:
+        st.subheader(" Dwi Ilham Ramadhany ")
+        st.markdown(" Bangkalan, 7 November 2003 ")
+        st.markdown(" 2043221054 ")
+        
+        st.markdown("---")  # Garis pemisah
+        
+        st.markdown("#### Motivasi")
+        st.info("""
+        "Investasikanlah kesehatanmu selama mungkin."
+        """)
+        
+        st.markdown("---")  # Garis pemisah
+        
+        st.markdown("#### Kontak")
+        st.markdown("📧 dwrmdhany11@gmail.com")
 
 
     # --- KONTEN TAB 2: HELLEN ALDENIA ROVI ---

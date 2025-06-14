@@ -1,3 +1,15 @@
+import streamlit as st
+from streamlit_option_menu import option_menu
+from PIL import Image
+import home 
+import forecast
+import prediction
+import about
+
+st.set_page_config(
+    page_title="Dashboard"
+)
+
 class MultiApp:
 
     def __init__(self):
@@ -9,38 +21,46 @@ class MultiApp:
             "function": func
         })
 
-    def run(self):  # ← pakai self di sini!
+    def run(self):  # ✅ Perbaikan: harus pakai 'self'
         # Sidebar
         with st.sidebar:
-            logomain = Image.open("asset/home.png")
-            st.image(logomain)        
+            try:
+                logomain = Image.open("asset/home.png")
+                st.image(logomain)
+            except Exception as e:
+                st.warning(f"Gagal memuat logo: {e}")
+            
             app = option_menu(
                 menu_title='Dashboard',
-                options=['Home','Forecast','Prediction','About'],
-                icons=['house','activity','alt','info-circle-fill'],
+                options=['Home', 'Forecast', 'Prediction', 'About'],
+                icons=['house', 'activity', 'alt', 'info-circle-fill'],
                 menu_icon='bi-cast',
                 default_index=0,
                 styles={
-                        "container": {"padding": "5!important",
-                                    "background-color":'#081f5c'},
-                        "icon": {"color": "white", "font-size": "23px"}, 
-                        "nav-link": {"color":"black",
-                                    "font-size": "20px", 
-                                    "text-align": "left", 
-                                    "margin":"0px", 
-                                    "--hover-color": "#f7f2eb"},
-                        "nav-link-selected": {"background-color": "#02ab21"},
-                })
+                    "container": {"padding": "5!important", "background-color": '#081f5c'},
+                    "icon": {"color": "white", "font-size": "23px"},
+                    "nav-link": {"color": "black", "font-size": "20px", "text-align": "left", "margin": "0px", "--hover-color": "#f7f2eb"},
+                    "nav-link-selected": {"background-color": "#02ab21"},
+                }
+            )
 
-        if app == "Home":
-            home.app()
-        elif app == "Forecast":
-            forecast.app()    
-        elif app == "Prediction":
-            prediction.app()        
-        elif app == "About":
-            about.app()     
+        # Menu routing
+        try:
+            if app == "Home":
+                home.app()
+            elif app == "Forecast":
+                forecast.app()
+            elif app == "Prediction":
+                prediction.app()
+            elif app == "About":
+                about.app()
+        except KeyError as ke:
+            st.error(f"Kolom hilang dalam data: {ke}. Periksa apakah file CSV memiliki kolom tersebut.")
+        except FileNotFoundError as fnf:
+            st.error(f"File tidak ditemukan: {fnf}. Pastikan path dan nama file benar.")
+        except Exception as e:
+            st.error(f"Terjadi error: {e}")
 
-# Jalankan MultiApp
+# Jalankan aplikasi
 app = MultiApp()
 app.run()

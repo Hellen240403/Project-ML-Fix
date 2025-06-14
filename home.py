@@ -64,22 +64,22 @@ def app():
         """, unsafe_allow_html=True)
 
     with col2:
-    st.markdown("""
-    <div class='weather-box' style="
-        background-color: rgba(255, 255, 255, 0.6);
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    ">
-        <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">
-            <li>🌡️ <b>Suhu:</b> 29°C</li>
-            <li>💧 <b>Kelembapan:</b> 78%</li>
-            <li>🌬️ <b>Angin:</b> 26 km/h</li>
-            <li>🌞 <b>UV:</b> Ekstrem</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
+        st.markdown("""
+        <div class='weather-box' style="
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        ">
+            <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">
+                <li>🌡️ <b>Suhu:</b> 29°C</li>
+                <li>💧 <b>Kelembapan:</b> 78%</li>
+                <li>🌬️ <b>Angin:</b> 26 km/h</li>
+                <li>🌞 <b>UV:</b> Ekstrem</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
 
     with st.expander("📘 Pendahuluan", expanded=True):
         tab1, tab2, tab3 = st.tabs(["📖 Latar Belakang", "🎯 Tujuan", "🎁 Manfaat"])

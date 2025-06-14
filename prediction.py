@@ -83,6 +83,7 @@ def app():
 
     # --- Input dari Pengguna ---
     col1, col2 = st.columns(2)
+    
     with col1:
         temperature = st.slider(
             '🌡️ Temperatur (°C)',
@@ -132,9 +133,12 @@ def app():
         )
     
     # Tampilkan gambar awan yang dipilih
-    st.image(cloud_options[cloud_name]["img"], caption=f"Jenis Awan: {cloud_name}", width=500, use_column_width="auto")
-    
-    cloud_code = cloud_options[cloud_name]["code"]
+st.image(
+    cloud_options[cloud_name]["img"], 
+    caption=f"Jenis Awan: {cloud_name}", 
+    use_container_width=True
+)
+cloud_code = cloud_options[cloud_name]["code"]
 
     # --- Tombol Prediksi ---
     if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):

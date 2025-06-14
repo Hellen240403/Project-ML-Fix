@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 def app():
     st.title("SkyWard Team")
@@ -24,11 +25,9 @@ def app():
         col1, col2 = st.columns([1.8, 1.2], gap="large")
         with col1:
             try:
-                st.image(
-                    "asset/IMG_4105.JPG",
-                    caption="Dwi Ilham Ramadhany",
-                    use_container_width=True,
-                )
+                img = Image.open("asset/IMG_4105.JPG")
+                img = img.rotate(-90, expand=True)  # Memutar gambar 90 derajat ke kanan
+                st.image(img, caption="Dwi Ilham Ramadhany", use_container_width=True)
             except Exception as e:
                 st.warning(f"Gagal memuat gambar: {e}")
         with col2:

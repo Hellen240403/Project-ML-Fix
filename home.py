@@ -66,10 +66,10 @@ def app():
     with col2:
         st.markdown("""
         <div class='weather-box' style="
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: 0;
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0;
             margin-bottom: 10px;
         ">
             <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">

@@ -62,11 +62,11 @@ def app():
     st.markdown("## ☁️ Masukkan Parameter Cuaca")
 
     cloud_options = {
-        "Cumulus": {"code": 1, "img": "asset/cumulus.JPG"},
-        "Cirrus": {"code": 2, "img": "asset/cirrus.JPG"},
-        "Stratus": {"code": 3, "img": "asset/stratus.JPG"},
-        "Nimbostratus": {"code": 4, "img": "asset/nimbostratus.JPG"},
-        "Cumulonimbus": {"code": 5, "img": "asset/cumulonimbus.JPG"},
+        "Cumulus": {"code": 1, "img": "asset/cumulus.jpg"},
+        "Cirrus": {"code": 2, "img": "asset/cirrus.jpg"},
+        "Stratus": {"code": 3, "img": "asset/stratus.jpg"},
+        "Nimbostratus": {"code": 4, "img": "asset/nimbostratus.jpg"},
+        "Cumulonimbus": {"code": 5, "img": "asset/cumulonimbus.jpg"},
     }
 
     col1, col2 = st.columns(2)

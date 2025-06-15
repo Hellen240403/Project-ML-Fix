@@ -82,7 +82,7 @@ def app():
 
     # ---------------- Kartu Cuaca ---------------- #
     with col2: 
-            weather = None
+        weather = None
         if st.button("🔄 Refresh"):
             st.cache_data.clear()
 

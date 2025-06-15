@@ -82,6 +82,10 @@ def app():
 
     # ---------------- Kartu Cuaca ---------------- #
     with col2: 
+            weather = None
+        if st.button("🔄 Refresh"):
+            st.cache_data.clear()
+
         try:
             weather = get_current_weather()
         except Exception as e:
@@ -108,10 +112,6 @@ def app():
             """, unsafe_allow_html=True)
             st.caption("📌 Data real-time — AccuWeather API")
         st.markdown("</div>", unsafe_allow_html=True)
-
-            weather = None
-        if st.button("🔄 Refresh"):
-            st.cache_data.clear()
 
     # ------------- Penjelasan & Dataset ---------- #
     with st.expander("📘 Pendahuluan", expanded=False):

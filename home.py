@@ -7,7 +7,7 @@ from PIL import Image
 #  CONFIG ACCUWEATHER API
 # ------------------------------------------------------------------ #
 # Pastikan ACCUWEATHER_KEY sudah ditambahkan ke .streamlit/secrets.toml
-API_KEY = "ISI_API_KEY_MU_DISINI"
+API_KEY = "xQGm4v0qhpHLusHsjGGA5O2GJPNXAQSO"
 LOCATION_KEY = "203449"  # Surabaya
 
 @st.cache_data(ttl=600)  # cache 10 menit

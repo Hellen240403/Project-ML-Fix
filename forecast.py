@@ -1,4 +1,11 @@
 import streamlit as st
+st.set_page_config(
+    page_title="Prediksi Cuaca Surabaya ☀️🌧️",
+    page_icon="🌦️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -11,7 +18,6 @@ from sklearn.preprocessing import MinMaxScaler
 # ──────────────────────────────────────────────────────────────
 def load_and_prepare_data(filepath: str) -> pd.DataFrame:
     df = pd.read_csv(filepath, sep=';', engine='python')
-
     df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
 
     if 'tanggal' not in df.columns:
@@ -62,27 +68,14 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 # 3. PLOTTING
 # ──────────────────────────────────────────────────────────────
 def plot_forecast(df, forecast_df):
-    st.markdown("""
-        <style>
-            .plot-title {
-                font-size: 28px;
-                font-weight: bold;
-                color: #1f77b4;
-                margin-top: 20px;
-                text-align: center;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
     for col in df.columns:
         fig = make_subplots(rows=1, cols=1)
         fig.add_trace(go.Scatter(x=df.index, y=df[col], name='📘 Historikal', line=dict(color='royalblue')))
-        fig.add_trace(go.Scatter(x=forecast_df.index, y=forecast_df[col], name='📙 Prakiraan', line=dict(color='darkorange')))
-        fig.update_layout(title=f"📊 Historikal & Forecast: {col}",
+        fig.add_trace(go.Scatter(x=forecast_df.index, y=forecast_df[col], name='🔮 Prakiraan', line=dict(color='darkorange')))
+        fig.update_layout(title=f"📈 Historikal & Forecast: {col.capitalize()}",
                           xaxis_title="Tanggal",
-                          yaxis_title=col,
+                          yaxis_title=col.capitalize(),
                           template="plotly_white",
-                          hovermode="x unified",
                           xaxis=dict(rangeslider=dict(visible=True), type="date"))
         st.plotly_chart(fig, use_container_width=True)
 
@@ -90,31 +83,12 @@ def plot_forecast(df, forecast_df):
 # 4. STREAMLIT APP
 # ──────────────────────────────────────────────────────────────
 def app():
-    st.set_page_config(page_title="Prediksi Cuaca Surabaya", layout="wide")
-    st.markdown("""
-        <style>
-            .title-text {
-                font-size: 36px;
-                font-weight: bold;
-                color: #0e1117;
-                text-align: center;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-            .subtext {
-                font-size: 20px;
-                text-align: center;
-                color: #555;
-            }
-        </style>
-        <div class='title-text'>⛅ Prediksi Cuaca Kota Surabaya</div>
-        <div class='subtext'>Menggunakan Model LSTM dengan Visualisasi Interaktif</div>
-    """, unsafe_allow_html=True)
+    st.markdown("<h1 style='color:#007acc;'>⛅ Prediksi Cuaca Kota Surabaya</h1>", unsafe_allow_html=True)
+    st.caption("📍 Data dari BMKG | 📅 Real-time Forecast | 🚀 Model: LSTM")
 
     df = load_and_prepare_data("data/df_hujan.csv")
-
-    with st.expander("📄 Lihat Data Historikal Cuaca"):
-        st.dataframe(df)
+    with st.expander("📂 Lihat Data Historikal"):
+        st.dataframe(df, use_container_width=True, height=300)
 
     try:
         model = keras_model("model/prediksi_cuaca_lstm_mls6.h5")
@@ -122,11 +96,11 @@ def app():
         st.error(f"❌ Gagal memuat model: {e}")
         return
 
-    st.markdown("### 🔢 Masukkan Parameter Prediksi")
-    n_day = st.slider("Jumlah Hari yang Akan Diprediksi:", min_value=1, max_value=30, value=7)
+    st.subheader("🛠️ Parameter Prediksi")
+    n_day = st.slider("🎯 Pilih jumlah hari ke depan untuk prediksi", min_value=1, max_value=30, value=7)
 
-    if st.button("🔮 Mulai Prediksi"):
-        with st.spinner("⏳ Sedang memproses prediksi, mohon tunggu..."):
+    if st.button("🚀 Jalankan Prediksi"):
+        with st.spinner("⏳ Sedang memproses prediksi..."):
             scaler = MinMaxScaler()
             df_scaled = scaler.fit_transform(df)
 
@@ -136,11 +110,10 @@ def app():
             input_data = supervised.values[:, :n_back * n_feat]
 
             forecasts = []
-            for i in range(n_day):
+            for _ in range(n_day):
                 seq = input_data[-1].reshape((1, n_back, n_feat))
                 pred = model.predict(seq, verbose=0)
                 forecasts.append(pred[0])
-
                 next_input = np.append(input_data[-1][n_feat:], pred[0])
                 input_data = np.vstack([input_data, next_input])
 
@@ -149,9 +122,8 @@ def app():
                                    index=pd.date_range(df.index[-1] + pd.Timedelta(days=1), periods=n_day),
                                    columns=df.columns)
 
-            st.markdown("""
-                <div style='font-size:24px; font-weight:bold; color:#1f77b4;'>📈 Grafik Hasil Prediksi Cuaca</div>
-            """, unsafe_allow_html=True)
+            st.success("✅ Prediksi selesai!")
+            st.subheader("📈 Grafik Perkiraan Cuaca")
             plot_forecast(df, fcst_df)
 
 # Jalankan langsung jika dieksekusi

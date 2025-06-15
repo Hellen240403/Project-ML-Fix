@@ -55,7 +55,7 @@ def app():
     st.markdown("""
     <div class='content-box'>
         <p style='font-size:18px; text-align: justify;'>
-            <b>SkyWard</b> merupakan sebuah proyek pembelajaran berbasis <b>Machine Learning</b> dari mahasiswa <b>Departemen Statistika Bisnis</b> Universitas Airlangga Angkatan 2022.
+            <b>SkyWard</b> merupakan sebuah proyek pembelajaran berbasis <b>Machine Learning</b> dari mahasiswa <b>Departemen Statistika Bisnis</b> Institut Teknologi Sepuluh Nopember Angkatan 2022.
             Proyek ini dirancang untuk memprediksi cuaca harian di Kota Surabaya dengan memanfaatkan <b>algoritma LSTM dan ANN</b>.
             Tujuannya adalah memberi solusi analisis data real-time yang bermanfaat dan mudah diakses masyarakat 🌦️.
         </p>
@@ -96,8 +96,8 @@ def app():
         }
     ]
 
-    # Buat tab untuk setiap anggota tim
-    tab_titles = [member["Nama"].split()[0] for member in team]
+    # Gunakan nama panjang untuk judul tab
+    tab_titles = [member["Nama"] for member in team]
     tabs = st.tabs(tab_titles)
 
     for tab, member in zip(tabs, team):
@@ -106,7 +106,7 @@ def app():
             with col1:
                 try:
                     img = Image.open(member["img"])
-                    if "Dwi Ilham Ramadhany" in member["Nama"] or "Dwi Ilham Ramadhany" in member["Nama"]:
+                    if member["Nama"] in ["Dwi Ilham Ramadhany", "Endita Prastyansyach"]:
                         img = img.rotate(-90, expand=True)
                     st.image(img, caption=member["Nama"], use_container_width=True)
                 except Exception as e:

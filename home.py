@@ -13,20 +13,16 @@ LOCATION_KEY = "203449"  # Surabaya
 @st.cache_data(ttl=600)  # cache 10 menit
 def get_current_weather():
     """Ambil cuaca Surabaya terkini dari AccuWeather API"""
-    url = f"https://dataservice.accuweather.com/currentconditions/v1/{LOCATION_KEY}"
-    params = {
-        "apikey": API_KEY,
-        "details": True,
-        "language": "id-id"
-    }
+    url    = f"https://dataservice.accuweather.com/currentconditions/v1/{LOCATION_KEY}"
+    params = {"apikey": API_KEY, "details": True, "language": "id-id"}
     r = requests.get(url, params=params, timeout=10)
     r.raise_for_status()
     data = r.json()[0]
     return {
         "temperature": f"{data['Temperature']['Metric']['Value']}°C",
-        "humidity": f"{data['RelativeHumidity']}%",
-        "wind": f"{data['Wind']['Speed']['Metric']['Value']} km/h",
-        "uv": data["UVIndexText"]
+        "humidity"   : f"{data['RelativeHumidity']}%",
+        "wind"       : f"{data['Wind']['Speed']['Metric']['Value']} km/h",
+        "uv"         : data["UVIndexText"]
     }
 
 # ------------------------------------------------------------------ #

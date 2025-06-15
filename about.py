@@ -67,57 +67,57 @@ def app():
         {
             "Nama": "Dwi Ilham Ramadhany",
             "img": "asset/IMG_4105.JPG",
-            "Tempat,Tanggal Lahir": "Bangkalan, 7 November 2003",
+            "TTL": "Bangkalan, 7 November 2003",
             "NRP": "2043221054",
             "Status": "Mahasiswa Aktif",
             "Motivasi": "Investasikanlah kesehatanmu selama mungkin.",
             "Email": "dwrmdhany11@gmail.com",
-            "Linkedin": "https://linkedin.com/in/dwiilhamramadhany"
+            "LinkedIn": "https://linkedin.com/in/dwiilhamramadhany"
         },
         {
             "Nama": "Hellen Aldenia Rovi",
             "img": "asset/IMG_3428_11zon.jpg",
-            "Tempat,Tanggal Lahir": "Surabaya, 24 Agustus 2003",
+            "TTL": "Surabaya, 24 Agustus 2003",
             "NRP": "2043221045",
             "Status": "Mahasiswa Aktif",
-            "Motivation": "Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.",
+            "Motivasi": "Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.",
             "Email": "hellenaldenia@gmail.com",
-            "Linkedin": "https://linkedin.com/in/hellenaldenia"
+            "LinkedIn": "https://linkedin.com/in/hellenaldenia"
         },
         {
             "Nama": "Endita Prastyansyach",
             "img": "asset/IMG_4105.JPG",  # Ganti jika punya foto berbeda
-            "Tempat,Tanggal Lahir": "Sidoarjo, 10 Januari 2004",
+            "TTL": "Sidoarjo, 10 Januari 2004",
             "NRP": "2043221145",
             "Status": "Mahasiswa Aktif",
-            "Motivation": "Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.",
+            "Motivasi": "Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.",
             "Email": "enditapras@gmail.com",
-            "Linkedin": "https://linkedin.com/in/enditapras"
+            "LinkedIn": "https://linkedin.com/in/enditapras"
         }
     ]
 
+    # Tampilkan Profil
     for member in team:
-        tab = st.container()
-        with tab:
+        with st.container():
             col1, col2 = st.columns([1, 2], gap="large")
             with col1:
                 try:
                     img = Image.open(member["img"])
-                    if "Dwi Ilham" in member["name"] or "Endita" in member["name"]:
+                    if "Dwi Ilham" in member["Nama"] or "Endita" in member["Nama"]:
                         img = img.rotate(-90, expand=True)
-                    st.image(img, caption=member["name"], use_container_width=True)
+                    st.image(img, caption=member["Nama"], use_container_width=True)
                 except Exception as e:
                     st.warning(f"Gagal memuat gambar: {e}")
             with col2:
-                st.markdown(f"<div class='subheader-style'>{member['name']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='subheader-style'>{member['Nama']}</div>", unsafe_allow_html=True)
                 st.markdown(f"""
-                    <span class='label-style'>📍 Tempat, Tanggal Lahir:</span> {member['ttl']}  \n
-                    <span class='label-style'>🆔 NRP:</span> {member['nrp']}  \n
-                    <span class='label-style'>🎓 Status:</span> {member['status']}  \n
-                    <span class='label-style'>📧 Email:</span> {member['email']}  \n
-                    <span class='label-style'>🔗 LinkedIn:</span> <a href="{member['linkedin']}" target="_blank" class="linkedin-link">{member['linkedin'].split('//')[1]}</a>
+                    <span class='label-style'>📍 Tempat, Tanggal Lahir:</span> {member['TTL']}  \n
+                    <span class='label-style'>🆔 NRP:</span> {member['NRP']}  \n
+                    <span class='label-style'>🎓 Status:</span> {member['Status']}  \n
+                    <span class='label-style'>📧 Email:</span> {member['Email']}  \n
+                    <span class='label-style'>🔗 LinkedIn:</span> <a href="{member['LinkedIn']}" target="_blank" class="linkedin-link">{member['LinkedIn'].replace('https://','')}</a>
                 """, unsafe_allow_html=True)
-                st.markdown(f"<div class='motivasi-box'>💡 <b>Motivasi:</b> {member['motivation']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='motivasi-box'>💡 <b>Motivasi:</b> {member['Motivasi']}</div>", unsafe_allow_html=True)
 
     # Sumber Data
     st.markdown("## 📚 Sumber Data")

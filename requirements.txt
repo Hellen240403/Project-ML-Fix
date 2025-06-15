@@ -14,3 +14,4 @@ tensorflow
 Pillow
 statsmodels
 catboost
+requests

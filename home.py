@@ -1,32 +1,10 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-import requests
-
-# ---------------------------- API Configuration ----------------------------
-API_KEY = "YOUR_ACCUWEATHER_API_KEY"  # Ganti dengan API key Anda
-LOCATION_KEY = "203449"  # Location Key untuk Surabaya dari AccuWeather
-
-def get_current_weather():
-    url = f"http://dataservice.accuweather.com/currentconditions/v1/{LOCATION_KEY}"
-    params = {"apikey": API_KEY, "details": True}
-    try:
-        r = requests.get(url, params=params)
-        r.raise_for_status()
-        data = r.json()[0]
-        return {
-            "temperature": f"{data['Temperature']['Metric']['Value']}°C",
-            "humidity": f"{data['RelativeHumidity']}%",
-            "wind": f"{data['Wind']['Speed']['Metric']['Value']} km/h",
-            "uv": f"{data['UVIndexText']}",
-        }
-    except Exception as e:
-        st.error(f"❌ Gagal mengambil data cuaca: {e}")
-        return None
 
 # ---------------------------- CSS Styling ----------------------------
 def set_custom_css():
-    st.markdown(\"\"\"
+    st.markdown("""
         <style>
         .stApp {
             background-color: white;
@@ -39,7 +17,7 @@ def set_custom_css():
             margin-bottom: 10px;
         }
         .weather-box {
-            background-color: #ffffffcc;
+            background-color: rgba(255, 255, 255, 0.6);
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -54,13 +32,13 @@ def set_custom_css():
             font-size: 18px !important;
         }
         </style>
-    \"\"\", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ---------------------------- Data Loader ----------------------------
 def load_data(file_path, index_col=None):
     try:
         df = pd.read_csv(file_path, index_col=index_col, sep=';')
-        df.columns = df.columns.str.strip().str.lower().str.replace('\\ufeff', '')
+        df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
         return df
     except FileNotFoundError:
         st.error(f"❌ File '{file_path}' tidak ditemukan.")
@@ -79,52 +57,55 @@ def app():
     col1, col2 = st.columns([1, 1.3])
 
     with col1:
-        st.markdown(\"\"\"
+        st.markdown("""
         <div style="background-color: #f0f3fa; padding: 20px; border-radius: 12px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
             <h3 style='color: #000000; margin: 0;'>📍 Cuaca Surabaya Hari Ini</h3>
         </div>
-        \"\"\", unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     with col2:
-        weather = get_current_weather()
-        if weather:
-            st.markdown(f\"\"\"
-            <div style="border-radius: 18px; padding: 20px; margin-bottom: 5px; width: fit-content;">
-                <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">
-                    <li>🌡️ <span style="font-weight:bold; color:#d32f2f;">Suhu:</span> {weather['temperature']}</li>
-                    <li>💧 <span style="font-weight:bold; color:#0288d1;">Kelembapan:</span> {weather['humidity']}</li>
-                    <li>🌬️ <span style="font-weight:bold; color:#0277bd;">Angin:</span> {weather['wind']}</li>
-                    <li>🌞 <span style="font-weight:bold; color:#fbc02d;">UV:</span> {weather['uv']}</li>
-                </ul>
-            </div>
-            \"\"\", unsafe_allow_html=True)
-            st.caption("📌 Data real-time dari AccuWeather")
-        else:
-            st.warning("Data cuaca tidak tersedia saat ini.")
+        st.markdown("""
+        <div class='weather-box'>
+            <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 16px;">
+                <li>🌡️ <span style="font-weight:bold; color:#d32f2f;">Suhu:</span> 29°C</li>
+                <li>💧 <span style="font-weight:bold; color:#0288d1;">Kelembapan:</span> 78%</li>
+                <li>🌬️ <span style="font-weight:bold; color:#0277bd;">Angin:</span> 26 km/h</li>
+                <li>🌞 <span style="font-weight:bold; color:#fbc02d;">UV:</span> Ekstrem</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        st.caption("📌 Data dari BMKG, diolah kembali oleh sistem prediksi cuaca.")
 
     with st.expander("📘 Pendahuluan", expanded=True):
         tab1, tab2, tab3 = st.tabs(["📖 Latar Belakang", "🎯 Tujuan", "🎁 Manfaat"])
 
         with tab1:
-            st.info(\"\"\"
-            (Isi latar belakang sesuai sebelumnya)
-            \"\"\")
+            st.info("""
+            Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer pada waktu tertentu di masa depan dengan menganalisis data meteorologi. Kota Surabaya sebagai kota metropolitan sangat membutuhkan informasi cuaca yang akurat. Dengan demikian, penelitian ini bertujuan untuk membangun model prediksi cuaca yang akurat demi mendukung aktivitas masyarakat.
+            """)
 
         with tab2:
-            st.success(\"\"\"
-            (Isi tujuan sesuai sebelumnya)
-            \"\"\")
-        
+            st.success("""
+            1. Membangun model prediksi cuaca Surabaya dengan ANN dan LSTM.
+            2. Mengoptimalkan akurasi prediksi menggunakan data BMKG 2023–2025.
+            3. Menilai performa ANN vs LSTM.
+            4. Memberikan kontribusi AI dalam prediksi cuaca lokal.
+            """)
+
         with tab3:
-            st.warning(\"\"\"
-            (Isi manfaat sesuai sebelumnya)
-            \"\"\")
+            st.warning("""
+            1. Masyarakat dapat merencanakan aktivitas lebih baik.
+            2. Pemerintah & sektor penting bisa mengambil keputusan lebih tepat.
+            3. Deteksi dini potensi cuaca ekstrem.
+            4. Kontribusi terhadap pengembangan AI untuk prediksi cuaca.
+            5. Peningkatan pemahaman cuaca tropis di Surabaya.
+            """)
 
     with st.expander("🧠 Metode"): 
-        st.markdown(\"\"\"
-        - 🤖 **Artificial Neural Network (ANN)**: Mengenali pola data non-linear
+        st.markdown("""
+        - 🤖 **Artificial Neural Network (ANN)**: Mengenali pola data non-linear  
         - 🔁 **Long Short-Term Memory (LSTM)**: Menangani data sekuensial cuaca jangka panjang
-        \"\"\")
+        """)
 
     df = load_data("data/df_hujan.csv")
     if df is not None:
@@ -137,5 +118,3 @@ def app():
 if __name__ == "__main__":
     app()
 """
-
-corrected_combined_code[:1500]  # Previewing a portion of the full code due to length

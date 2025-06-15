@@ -11,6 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 # ──────────────────────────────────────────────────────────────
 def load_and_prepare_data(filepath: str) -> pd.DataFrame:
     df = pd.read_csv(filepath, sep=';', engine='python')
+
     df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
 
     if 'tanggal' not in df.columns:
@@ -61,43 +62,59 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 # 3. PLOTTING
 # ──────────────────────────────────────────────────────────────
 def plot_forecast(df, forecast_df):
+    st.markdown("""
+        <style>
+            .plot-title {
+                font-size: 28px;
+                font-weight: bold;
+                color: #1f77b4;
+                margin-top: 20px;
+                text-align: center;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
     for col in df.columns:
         fig = make_subplots(rows=1, cols=1)
-        fig.add_trace(go.Scatter(x=df.index, y=df[col], name='Historikal', line=dict(color='#1f77b4')))
-        fig.add_trace(go.Scatter(x=forecast_df.index, y=forecast_df[col], name='Prakiraan', line=dict(color='#ff7f0e')))
-        fig.update_layout(
-            title={"text": f"📈 Historikal & Prakiraan: {col.title()}", "x":0.5, "xanchor": "center"},
-            xaxis_title="Tanggal",
-            yaxis_title=col,
-            template="plotly_white",
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
-            xaxis=dict(rangeslider=dict(visible=True), type="date")
-        )
+        fig.add_trace(go.Scatter(x=df.index, y=df[col], name='📘 Historikal', line=dict(color='royalblue')))
+        fig.add_trace(go.Scatter(x=forecast_df.index, y=forecast_df[col], name='📙 Prakiraan', line=dict(color='darkorange')))
+        fig.update_layout(title=f"📊 Historikal & Forecast: {col}",
+                          xaxis_title="Tanggal",
+                          yaxis_title=col,
+                          template="plotly_white",
+                          hovermode="x unified",
+                          xaxis=dict(rangeslider=dict(visible=True), type="date"))
         st.plotly_chart(fig, use_container_width=True)
 
 # ──────────────────────────────────────────────────────────────
 # 4. STREAMLIT APP
 # ──────────────────────────────────────────────────────────────
 def app():
-    st.set_page_config(page_title="📡 Prediksi Cuaca Surabaya", layout="wide")
-
+    st.set_page_config(page_title="Prediksi Cuaca Surabaya", layout="wide")
     st.markdown("""
-        <h1 style='text-align: center; color: #0E6BA8;'>🌤️ Prediksi Cuaca Kota Surabaya</h1>
-        <p style='text-align: center; font-size:18px;'>
-            Pantau dan prediksi cuaca Surabaya dengan teknologi <b>Deep Learning</b> terkini menggunakan <b>LSTM</b> 📊⛅
-        </p>
+        <style>
+            .title-text {
+                font-size: 36px;
+                font-weight: bold;
+                color: #0e1117;
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            .subtext {
+                font-size: 20px;
+                text-align: center;
+                color: #555;
+            }
+        </style>
+        <div class='title-text'>⛅ Prediksi Cuaca Kota Surabaya</div>
+        <div class='subtext'>Menggunakan Model LSTM dengan Visualisasi Interaktif</div>
     """, unsafe_allow_html=True)
-
-    with st.expander("ℹ️ Tentang Data", expanded=False):
-        st.markdown("""
-        Data diperoleh dari sumber resmi <b>BMKG</b> dan berisi informasi harian terkait suhu, kelembapan, curah hujan, dan lainnya.
-        Dataset ini telah melalui proses pembersihan dan normalisasi sebelum digunakan untuk pelatihan model.
-        """, unsafe_allow_html=True)
 
     df = load_and_prepare_data("data/df_hujan.csv")
 
-    st.subheader("📊 Data Historikal Cuaca")
-    st.dataframe(df.tail(10), use_container_width=True, height=300)
+    with st.expander("📄 Lihat Data Historikal Cuaca"):
+        st.dataframe(df)
 
     try:
         model = keras_model("model/prediksi_cuaca_lstm_mls6.h5")
@@ -105,15 +122,11 @@ def app():
         st.error(f"❌ Gagal memuat model: {e}")
         return
 
-    st.markdown("""
-        <hr style='border:1px solid #ccc;'>
-        <h3 style='color:#0E6BA8;'>🔮 Prediksi Cuaca</h3>
-    """, unsafe_allow_html=True)
+    st.markdown("### 🔢 Masukkan Parameter Prediksi")
+    n_day = st.slider("Jumlah Hari yang Akan Diprediksi:", min_value=1, max_value=30, value=7)
 
-    n_day = st.slider("Pilih jumlah hari ke depan untuk diprediksi:", min_value=1, max_value=30, value=7)
-
-    if st.button("🚀 Mulai Prediksi"):
-        with st.spinner("Sedang memproses prediksi cuaca..."):
+    if st.button("🔮 Mulai Prediksi"):
+        with st.spinner("⏳ Sedang memproses prediksi, mohon tunggu..."):
             scaler = MinMaxScaler()
             df_scaled = scaler.fit_transform(df)
 
@@ -136,15 +149,11 @@ def app():
                                    index=pd.date_range(df.index[-1] + pd.Timedelta(days=1), periods=n_day),
                                    columns=df.columns)
 
-            st.success("✅ Prediksi selesai! Berikut hasilnya:")
+            st.markdown("""
+                <div style='font-size:24px; font-weight:bold; color:#1f77b4;'>📈 Grafik Hasil Prediksi Cuaca</div>
+            """, unsafe_allow_html=True)
             plot_forecast(df, fcst_df)
 
-    st.markdown("""
-        <hr style='border:1px dashed #ccc;'>
-        <div style='text-align: center; color: gray;'>
-            Dibuat oleh <b>SkyWard Team</b> ✨ | Statistika Bisnis 2022 📚
-        </div>
-    """, unsafe_allow_html=True)
-
+# Jalankan langsung jika dieksekusi
 if __name__ == "__main__":
     app()

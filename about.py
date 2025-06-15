@@ -96,9 +96,12 @@ def app():
         }
     ]
 
-    # Tampilkan Profil
-    for member in team:
-        with st.container():
+    # Buat tab untuk setiap anggota tim
+    tab_titles = [member["Nama"].split()[0] for member in team]
+    tabs = st.tabs(tab_titles)
+
+    for tab, member in zip(tabs, team):
+        with tab:
             col1, col2 = st.columns([1, 2], gap="large")
             with col1:
                 try:

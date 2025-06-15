@@ -81,7 +81,7 @@ def app():
         with col2:
             st.markdown("<div class='subheader-style'>Hellen Aldenia Rovi</div>", unsafe_allow_html=True)
             st.markdown("📍 Surabaya, 24 Agustus 2003  \n🆔 NRP: 2043221045")
-            st.markdown(""<div class='motivasi-box'> <i>Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.</i></div>"", unsafe_allow_html=True)
+            st.markdown("<div class='motivasi-box'> 💡 <i>Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.</i></div>"", unsafe_allow_html=True)
             st.markdown("📧 hellenaldenia@gmail.com")
 
     # --- Profil ENDITA ---
@@ -97,7 +97,7 @@ def app():
         with col2:
             st.markdown("<div class='subheader-style'>Endita Prastyansyach</div>", unsafe_allow_html=True)
             st.markdown("📍 Sidoarjo, 10 Januari 2004  \n🆔 NRP: 2043221145")
-            st.markdown("<div class='motivasi-box'>🤖 <i>Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.</i></div>", unsafe_allow_html=True)
+            st.markdown("<div class='motivasi-box'> 💡 <i>Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.</i></div>", unsafe_allow_html=True)
             st.markdown("📧 enditapras@gmail.com")
 
     # --- Sumber Data ---

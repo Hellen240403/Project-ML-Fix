@@ -81,7 +81,12 @@ def app():
         """, unsafe_allow_html=True)
 
     # ---------------- Kartu Cuaca ---------------- #
-    with col2:
+    with col2: 
+        try:
+            weather = get_current_weather()
+        except Exception as e:
+            st.error(f"Data cuaca tidak tersedia: {e}")
+            
         if weather:
             st.markdown(f"""
             <div class="weather-card" style="margin-left:10px;">
@@ -107,11 +112,6 @@ def app():
             weather = None
         if st.button("🔄 Refresh"):
             st.cache_data.clear()
-        
-        try:
-            weather = get_current_weather()
-        except Exception as e:
-            st.error(f"Data cuaca tidak tersedia: {e}")
 
     # ------------- Penjelasan & Dataset ---------- #
     with st.expander("📘 Pendahuluan", expanded=False):

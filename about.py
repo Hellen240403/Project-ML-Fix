@@ -81,7 +81,7 @@ def app():
         with col2:
             st.markdown("<div class='subheader-style'>Hellen Aldenia Rovi</div>", unsafe_allow_html=True)
             st.markdown("📍 Surabaya, 24 Agustus 2003  \n🆔 NRP: 2043221045")
-            st.markdown(""<div class='motivasi-box'>📊 <i>Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.</i></div>"", unsafe_allow_html=True)
+            st.markdown(""<div class='motivasi-box'> <i>Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.</i></div>"", unsafe_allow_html=True)
             st.markdown("📧 hellenaldenia@gmail.com")
 
     # --- Profil ENDITA ---

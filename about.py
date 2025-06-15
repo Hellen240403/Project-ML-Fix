@@ -106,7 +106,7 @@ def app():
             with col1:
                 try:
                     img = Image.open(member["img"])
-                    if "Dwi Ilham" in member["Nama"] or "Endita" in member["Nama"]:
+                    if "Dwi Ilham Ramadhany" in member["Nama"] or "Dwi Ilham Ramadhany" in member["Nama"]:
                         img = img.rotate(-90, expand=True)
                     st.image(img, caption=member["Nama"], use_container_width=True)
                 except Exception as e:

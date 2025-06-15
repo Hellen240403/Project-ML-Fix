@@ -105,8 +105,6 @@ def app():
             st.caption("📌 Data real-time — AccuWeather API")
         
         st.markdown("</div>", unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"Data cuaca tidak tersedia: {e}")
 
     # ------------- Penjelasan & Dataset ---------- #
     with st.expander("📘 Pendahuluan", expanded=False):

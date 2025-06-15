@@ -1,17 +1,21 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
-import home 
+import home
 import forecast
 import prediction
 import about
 
+# ✅ Panggil hanya sekali, dan di paling atas
 st.set_page_config(
-    page_title="Dashboard"
+    page_title="Prediksi Cuaca Surabaya ☀️🌧️",
+    page_icon="🌦️",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# ✅ Struktur MultiApp
 class MultiApp:
-
     def __init__(self):
         self.apps = []
 
@@ -21,7 +25,7 @@ class MultiApp:
             "function": func
         })
 
-    def run(self):  # ✅ Perbaikan: harus pakai 'self'
+    def run(self):
         # Sidebar
         with st.sidebar:
             try:
@@ -32,27 +36,33 @@ class MultiApp:
             
             app = option_menu(
                 menu_title='Dashboard',
-                options=['Home', 'Forecast', 'Prediction', 'About'],
-                icons=['house', 'activity', 'alt', 'info-circle-fill'],
-                menu_icon='bi-cast',
+                options=['🏠 Home', '🌦️ Forecast', '📊 Prediction', 'ℹ️ About'],
+                icons=['house', 'cloud-sun', 'bar-chart-line', 'info-circle-fill'],
+                menu_icon='cast',
                 default_index=0,
                 styles={
-                "container": {"padding": "5!important", "background-color": '#081f5c'},
-                "icon": {"color": "white", "font-size": "23px"},
-                "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px", "--hover-color": "#a7ebf2"},
-                "nav-link-selected": {"background-color": "#02ab21"},
+                    "container": {"padding": "5!important", "background-color": '#081f5c'},
+                    "icon": {"color": "white", "font-size": "23px"},
+                    "nav-link": {
+                        "color": "white", 
+                        "font-size": "20px", 
+                        "text-align": "left", 
+                        "margin": "0px", 
+                        "--hover-color": "#a7ebf2"
+                    },
+                    "nav-link-selected": {"background-color": "#02ab21"},
                 }
             )
 
-        # Menu routing
+        # Routing
         try:
-            if app == "Home":
+            if app == "🏠 Home":
                 home.app()
-            elif app == "Forecast":
+            elif app == "🌦️ Forecast":
                 forecast.app()
-            elif app == "Prediction":
+            elif app == "📊 Prediction":
                 prediction.app()
-            elif app == "About":
+            elif app == "ℹ️ About":
                 about.app()
         except KeyError as ke:
             st.error(f"Kolom hilang dalam data: {ke}. Periksa apakah file CSV memiliki kolom tersebut.")
@@ -61,6 +71,6 @@ class MultiApp:
         except Exception as e:
             st.error(f"Terjadi error: {e}")
 
-# Jalankan aplikasi
+# ✅ Jalankan aplikasi
 app = MultiApp()
 app.run()

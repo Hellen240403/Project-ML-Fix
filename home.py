@@ -7,8 +7,8 @@ from PIL import Image
 # ------------------------------------------------------------------ #
 #  CONFIG ACCUWEATHER API
 # ------------------------------------------------------------------ #
-API_KEY      = st.secrets.get("ACCUWEATHER_KEY", "YOUR_API_KEY")  # ganti jika tidak pakai secrets
-LOCATION_KEY = "203449"                                           # Surabaya
+API_KEY = "API_KEY_ASLI_KAMU"
+LOCATION_KEY = "203449"                           
 
 @st.cache_data(ttl=600)  # cache 10 menit
 def get_current_weather():

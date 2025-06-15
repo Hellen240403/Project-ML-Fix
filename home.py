@@ -81,11 +81,11 @@ def app():
         """, unsafe_allow_html=True)
 
     # ---------------- Kartu Cuaca ---------------- #
-    with col2: 
+    with col2:
         weather = None
         if st.button("🔄 Refresh"):
             st.cache_data.clear()
-
+    
         try:
             weather = get_current_weather()
         except Exception as e:
@@ -93,25 +93,26 @@ def app():
             
         if weather:
             st.markdown(f"""
-            <div class="weather-card" style="margin-left:10px;">
-              <ul style="
-                  list-style:none;
-                  margin:0;
-                  padding:0;
-                  font-size:16px;
-                  display:flex;
-                  gap:30px;
-                  flex-wrap:wrap;
-                  align-items:center;">
-                <li>🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</li>
-                <li>💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</li>
-                <li>🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</li>
-                <li>🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</li>
-              </ul>
+            <div class="weather-card" style="margin: 10px 0 10px 10px; padding: 15px 25px;">
+              <div style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  gap: 20px;
+                  font-size: 16px;
+                  min-width: 500px;
+                  ">
+                <div style="min-width: 120px;">🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</div>
+                <div style="min-width: 150px;">💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</div>
+                <div style="min-width: 140px;">🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</div>
+                <div style="min-width: 130px;">🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</div>
+              </div>
             </div>
             """, unsafe_allow_html=True)
+    
             st.caption("📌 Data real-time — AccuWeather API")
-        st.markdown("</div>", unsafe_allow_html=True)
+
 
     # ------------- Penjelasan & Dataset ---------- #
     with st.expander("📘 Pendahuluan", expanded=False):

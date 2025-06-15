@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 
 def app():
-    # --- Gaya Umum ---
+    # Gaya CSS
     st.markdown("""
         <style>
         .title-style {
@@ -10,104 +10,124 @@ def app():
             font-weight: bold;
             text-align: center;
             color: #0E6BA8;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .subheader-style {
             font-size: 24px;
-            color: #4A4A4A;
-            font-weight: 600;
+            color: #0A3D62;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .label-style {
+            font-weight: bold;
+            color: #333;
         }
         .content-box {
-            background-color: rgba(255, 255, 255, 0.6);
-            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 25px;
             border-radius: 15px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
         }
         .motivasi-box {
-            background-color: #E0F7FA;
-            border-left: 5px solid #00BCD4;
-            padding: 10px 15px;
+            background-color: #e1f5fe;
+            border-left: 5px solid #0288d1;
+            padding: 12px 18px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .linkedin-link {
+            text-decoration: none;
+            color: #0077b5;
+            font-weight: bold;
+        }
+        .linkedin-link:hover {
+            color: #004471;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # --- Judul & Deskripsi ---
-    st.markdown("<div class='title-style'>🌤️ Tentang SkyWard Team</div>", unsafe_allow_html=True)
+    # Judul Halaman
+    st.markdown("<div class='title-style'>☁️ Tentang Tim SkyWard</div>", unsafe_allow_html=True)
 
+    # Deskripsi Proyek
     st.markdown("""
     <div class='content-box'>
         <p style='font-size:18px; text-align: justify;'>
-            Kami adalah mahasiswa <b>Departemen Statistika Bisnis Angkatan 2022</b> yang sedang mendalami mata kuliah <b>Machine Learning</b>. 
-            Dalam mata kuliah ini, kami mempelajari bagaimana <i>Artificial Intelligence (AI)</i> dan algoritma prediksi diterapkan pada data berurutan seperti cuaca.
-            Proyek ini, bernama <b>SkyWard</b> ☁️, merupakan hasil penerapan pengetahuan kami untuk membuat sistem prediksi cuaca berbasis <b>LSTM & ANN</b>.
+            <b>SkyWard</b> merupakan sebuah proyek pembelajaran berbasis <b>Machine Learning</b> dari mahasiswa <b>Departemen Statistika Bisnis</b> Universitas Airlangga Angkatan 2022.
+            Proyek ini dirancang untuk memprediksi cuaca harian di Kota Surabaya dengan memanfaatkan <b>algoritma LSTM dan ANN</b>.
+            Tujuannya adalah memberi solusi analisis data real-time yang bermanfaat dan mudah diakses masyarakat 🌦️.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    # --- Tabs ---
-    tab1, tab2, tab3 = st.tabs([
-        "👨‍💻 Dwi Ilham Ramadhany", 
-        "👩‍💻 Hellen Aldenia Rovi", 
-        "👩‍💻 Endita Prastyansyach"
-    ])
+    # Profil Anggota
+    team = [
+        {
+            "Nama": "Dwi Ilham Ramadhany",
+            "img": "asset/IMG_4105.JPG",
+            "Tempat,Tanggal Lahir": "Bangkalan, 7 November 2003",
+            "NRP": "2043221054",
+            "Status": "Mahasiswa Aktif",
+            "Motivasi": "Investasikanlah kesehatanmu selama mungkin.",
+            "Email": "dwrmdhany11@gmail.com",
+            "Linkedin": "https://linkedin.com/in/dwiilhamramadhany"
+        },
+        {
+            "Nama": "Hellen Aldenia Rovi",
+            "img": "asset/IMG_3428_11zon.jpg",
+            "Tempat,Tanggal Lahir": "Surabaya, 24 Agustus 2003",
+            "NRP": "2043221045",
+            "Status": "Mahasiswa Aktif",
+            "Motivation": "Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.",
+            "Email": "hellenaldenia@gmail.com",
+            "Linkedin": "https://linkedin.com/in/hellenaldenia"
+        },
+        {
+            "Nama": "Endita Prastyansyach",
+            "img": "asset/IMG_4105.JPG",  # Ganti jika punya foto berbeda
+            "Tempat,Tanggal Lahir": "Sidoarjo, 10 Januari 2004",
+            "NRP": "2043221145",
+            "Status": "Mahasiswa Aktif",
+            "Motivation": "Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.",
+            "Email": "enditapras@gmail.com",
+            "Linkedin": "https://linkedin.com/in/enditapras"
+        }
+    ]
 
-    # --- Profil DWI ---
-    with tab1:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            try:
-                img = Image.open("asset/IMG_4105.JPG")
-                img = img.rotate(-90, expand=True)
-                st.image(img, caption="Dwi Ilham Ramadhany", use_container_width=True)
-            except Exception as e:
-                st.warning(f"Gagal memuat gambar: {e}")
-        with col2:
-            st.markdown("<div class='subheader-style'>Dwi Ilham Ramadhany</div>", unsafe_allow_html=True)
-            st.markdown("📍 Bangkalan, 7 November 2003  \n🆔 NRP: 2043221054")
-            st.markdown("<div class='motivasi-box'>💡 <i>Investasikanlah kesehatanmu selama mungkin.</i></div>", unsafe_allow_html=True)
-            st.markdown("📧 dwrmdhany11@gmail.com")
+    for member in team:
+        tab = st.container()
+        with tab:
+            col1, col2 = st.columns([1, 2], gap="large")
+            with col1:
+                try:
+                    img = Image.open(member["img"])
+                    if "Dwi Ilham" in member["name"] or "Endita" in member["name"]:
+                        img = img.rotate(-90, expand=True)
+                    st.image(img, caption=member["name"], use_container_width=True)
+                except Exception as e:
+                    st.warning(f"Gagal memuat gambar: {e}")
+            with col2:
+                st.markdown(f"<div class='subheader-style'>{member['name']}</div>", unsafe_allow_html=True)
+                st.markdown(f"""
+                    <span class='label-style'>📍 Tempat, Tanggal Lahir:</span> {member['ttl']}  \n
+                    <span class='label-style'>🆔 NRP:</span> {member['nrp']}  \n
+                    <span class='label-style'>🎓 Status:</span> {member['status']}  \n
+                    <span class='label-style'>📧 Email:</span> {member['email']}  \n
+                    <span class='label-style'>🔗 LinkedIn:</span> <a href="{member['linkedin']}" target="_blank" class="linkedin-link">{member['linkedin'].split('//')[1]}</a>
+                """, unsafe_allow_html=True)
+                st.markdown(f"<div class='motivasi-box'>💡 <b>Motivasi:</b> {member['motivation']}</div>", unsafe_allow_html=True)
 
-    # --- Profil HELLEN ---
-    with tab2:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            try:
-                img = Image.open("asset/IMG_3428_11zon.jpg")
-                st.image(img, caption="Hellen Aldenia Rovi", use_container_width=True)
-            except Exception as e:
-                st.warning(f"Gagal memuat gambar: {e}")
-        with col2:
-            st.markdown("<div class='subheader-style'>Hellen Aldenia Rovi</div>", unsafe_allow_html=True)
-            st.markdown("📍 Surabaya, 24 Agustus 2003  \n🆔 NRP: 2043221045")
-            st.markdown("<div class='motivasi-box'> 💡 <i>Mengubah pola kompleks jadi cerita sederhana adalah keajaiban statistika.</i></div>", unsafe_allow_html=True)
-            st.markdown("📧 hellenaldenia@gmail.com")
-
-    # --- Profil ENDITA ---
-    with tab3:
-        col1, col2 = st.columns([1, 2], gap="medium")
-        with col1:
-            try:
-                img = Image.open("asset/IMG_4105.JPG")
-                img = img.rotate(-90, expand=True)
-                st.image(img, caption="Endita Prastyansyach", use_container_width=True)
-            except Exception as e:
-                st.warning(f"Gagal memuat gambar: {e}")
-        with col2:
-            st.markdown("<div class='subheader-style'>Endita Prastyansyach</div>", unsafe_allow_html=True)
-            st.markdown("📍 Sidoarjo, 10 Januari 2004  \n🆔 NRP: 2043221145")
-            st.markdown("<div class='motivasi-box'> 💡 <i>Membangun sistem yang tidak hanya memprediksi, tapi menciptakan masa depan lebih baik.</i></div>", unsafe_allow_html=True)
-            st.markdown("📧 enditapras@gmail.com")
-
-    # --- Sumber Data ---
+    # Sumber Data
     st.markdown("## 📚 Sumber Data")
     st.markdown("""
     <div class='content-box'>
         <p style='font-size:17px; text-align: justify;'>
-            Data cuaca diambil dari situs resmi <b>Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)</b> yang dapat diakses melalui 
-            <a href='https://dataonline.bmkg.go.id/data_harian' target='_blank'>dataonline.bmkg.go.id</a> 🌐.  
-            Terima kasih kepada BMKG atas data yang terbuka dan mudah diakses.
+            Data cuaca yang digunakan dalam proyek ini bersumber dari situs resmi <b>Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)</b>,
+            dan dapat diakses secara terbuka melalui 
+            <a href='https://dataonline.bmkg.go.id/data_harian' target='_blank'>dataonline.bmkg.go.id</a> 🌐.
+            Kami mengucapkan terima kasih kepada BMKG atas keterbukaan datanya.
         </p>
     </div>
     """, unsafe_allow_html=True)

@@ -37,7 +37,6 @@ class MultiApp:
             app = option_menu(
                 menu_title='Dashboard',
                 options=['🏠 Home', '🌦️ Forecast', '📊 Prediction', 'ℹ️ About'],
-                icons=['house', 'cloud-sun', 'bar-chart-line', 'info-circle-fill'],
                 menu_icon='cast',
                 default_index=0,
                 styles={

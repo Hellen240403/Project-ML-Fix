@@ -49,7 +49,7 @@ def set_custom_css():
     """, unsafe_allow_html=True)
 
 # ------------------------------------------------------------------ #
-#  DATASET LOCAL (contoh)
+#  DATASET LOCAL
 # ------------------------------------------------------------------ #
 def load_data(path):
     try:
@@ -74,28 +74,37 @@ def app():
     # ---------------- Judul Kotak ---------------- #
     with col1:
         st.markdown("""
-        <div style="background:#f0f3fa;padding:20px;border-radius:12px;
-                    box-shadow:2px 2px 10px rgba(0,0,0,.1);">
+        <div style="background:#f0f3fa;padding:20px 30px;border-radius:12px;
+                    box-shadow:2px 2px 10px rgba(0,0,0,.1); width:max-content;">
            <h3 style="margin:0;">📍 Cuaca Surabaya Hari Ini</h3>
         </div>
         """, unsafe_allow_html=True)
 
     # ---------------- Kartu Cuaca ---------------- #
     with col2:
+        weather = None
         if st.button("🔄 Refresh"):
             st.cache_data.clear()
+        
         try:
             weather = get_current_weather()
+        except Exception as e:
+            st.error(f"Data cuaca tidak tersedia: {e}")
+        
+        if weather:
             st.markdown(f"""
-            <div class="weather-card">
+            <div class="weather-card" style="margin-left:10px;">
              <ul style="list-style:none;margin:0;padding-left:0;font-size:16px;">
               <li>🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</li>
               <li>💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</li>
               <li>🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</li>
               <li>🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</li>
              </ul>
-            </div>""", unsafe_allow_html=True)
+            </div>
+            """, unsafe_allow_html=True)
             st.caption("📌 Data real-time — AccuWeather API")
+        
+        st.markdown("</div>", unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Data cuaca tidak tersedia: {e}")
 

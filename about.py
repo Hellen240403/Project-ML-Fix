@@ -72,7 +72,7 @@ def app():
             "Status": "Mahasiswa Aktif",
             "Motivasi": "Investasikanlah kesehatanmu selama mungkin.",
             "Email": "dwrmdhany11@gmail.com",
-            "LinkedIn": "https://linkedin.com/in/dwiilhamramadhany"
+            "LinkedIn": "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },
         {
             "Nama": "Hellen Aldenia Rovi",

@@ -7,7 +7,7 @@ from PIL import Image
 # ------------------------------------------------------------------ #
 #  CONFIG ACCUWEATHER API
 # ------------------------------------------------------------------ #
-API_KEY = "API_KEY_ASLI_KAMU"
+API_KEY = st.secrets["ACCUWEATHER_KEY"]
 LOCATION_KEY = "203449"                           
 
 @st.cache_data(ttl=600)  # cache 10 menit

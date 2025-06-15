@@ -7,7 +7,7 @@ def set_custom_css():
     st.markdown("""
         <style>
         .stApp {
-            background: linear-gradient(to bottom right, #e0f7fa, #e0f2fe);
+            background-color: white;
             font-family: 'Segoe UI', sans-serif;
         }
         .big-logo img {

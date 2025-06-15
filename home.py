@@ -94,16 +94,23 @@ def app():
         if weather:
             st.markdown(f"""
             <div class="weather-card" style="margin-left:10px;">
-             <ul style="list-style:none;margin:0;padding-left:0;font-size:16px;">
-              <li>🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</li>
-              <li>💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</li>
-              <li>🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</li>
-              <li>🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</li>
-             </ul>
+              <ul style="
+                  list-style:none;
+                  margin:0;
+                  padding:0;
+                  font-size:16px;
+                  display:flex;
+                  gap:30px;
+                  flex-wrap:wrap;
+                  align-items:center;">
+                <li>🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</li>
+                <li>💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</li>
+                <li>🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</li>
+                <li>🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</li>
+              </ul>
             </div>
             """, unsafe_allow_html=True)
             st.caption("📌 Data real-time — AccuWeather API")
-        
         st.markdown("</div>", unsafe_allow_html=True)
 
     # ------------- Penjelasan & Dataset ---------- #

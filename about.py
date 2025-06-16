@@ -76,7 +76,7 @@ def app():
         },
         {
             "Nama"     : "Hellen Aldenia Rovi",
-            "img"      : "asset/IMG_3248_11zon.jpg",
+            "img"      : "asset/IMG_3428_11zon.jpg",
             "TTL"      : "Surabaya, 24 Agustus 2003",
             "NRP"      : "2043221045",
             "Status"   : "Mahasiswa Aktif",

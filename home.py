@@ -84,12 +84,31 @@ def app():
 
     # Expanders
     with st.expander("📘 Pendahuluan"):
-        st.info("Isi penjelasan latar belakang di sini.")
+        st.info("""
+        Prediksi cuaca adalah proses untuk memprediksi kondisi atmosfer pada waktu tertentu di masa depan yang dilakukan dengan menganalisis data meteorologi yang ada. Perkembangannya teknologi dan metode yang terus membuat banyak pilihan untuk memprediksi cuaca dengan sangat canggih. Proses ini melibatkan penggunaan berbagai metode statistika dan algoritma pemrograman untuk memodelkan dinamika atmosfer. Berbagai parameter cuaca seperti suhu, kelembapan, tekanan udara, kecepatan angin, dan curah hujan digunakan untuk membuat ramalan cuaca yang dapat memberikan informasi kepada masyarakat untuk kegiatan sehari-hari. Dalam era teknologi yang semakin maju, prediksi menjadi lebih akurat dan dapat diakses dengan mudah melalui berbagai platform digital, memberikan kemudahan bagi masyarakat dalam merencanakan aktivitas mereka.
+        Kota Surabaya merupakan salah satu kota metropolitan dan kota besar di Indonesia dengan berbagai aktivitas ekonomi, sosial, dan budaya yang sangat tinggi. Aktifitas masyarakat Kota Surabaya sangat padat pada jam tertentu karena kegiatan yang dilakukan secara bersama. Masyarakat dituntut untuk terus waspada terhadap kondisi sekitar lingkungannya agar beraktifitas dengan aman. Cuaca menjadi sangat penting diperhatikan oleh masyarakat karna kondisi yang tidak menentu setiap waktunya. Oleh karena itu, informasi prediksi cuaca yang akurat sangat penting untuk mendukung keberlangsungan aktivitas tersebut. Kondisi tersebut menjadi pemicu untuk melakukan penelitian khusus mengenai prediksi cuaca Kota Surabaya untuk meningkatkan kualitas ramalan cuaca di daerah tersebut. Mengingat tantangan geografis dan dinamika cuaca tropis yang unik, model prediksi cuaca yang lebih tepat dan efisien sangat diperlukan untuk menghadapi ketidakpastian yang terjadi di masa depan.
+        """)
+    
+    with st.expander("🎯 Tujuan"):
+        st.markdown("""
+        Tujuan dari penelitian ini adalah untuk mengembangkan model prediksi cuaca yang akurat untuk Kota Surabaya dengan menggunakan metode Artificial Neural Network (ANN) dan Long Short-Term Memory (LSTM) berdasarkan data cuaca terbaru. Adapun tujuan penelitian secara spesifik dijabarkan sebagai berikut. 
+        - Memberikan informasi cuaca terkini secara real-time.
+        - Memprediksi kondisi cuaca beberapa hari ke depan di Surabaya.
+        - Menyediakan visualisasi data historis cuaca untuk analisis lanjutan.
+        """)
+    
+    with st.expander("💡 Manfaat"):
+        st.markdown("""
+        Penelitian ini memberikan berbagai manfaat yang dapat diterapkan dalam bidang meteorologi dan kehidupan sehari-hari, antara lain:
+        - Membantu masyarakat merencanakan aktivitas sehari-hari.
+        - Mendukung pengambilan keputusan di sektor transportasi, pertanian, dan pariwisata.
+        - Menjadi sarana edukasi tentang pentingnya data cuaca.
+        """)
 
     with st.expander("🧠 Metode"):
         st.markdown("""
-        - **ANN**    : Artificial Neural Network (ANN) adalah ...
-        - **LSTM**   : Long Short-Term Memory (LSTM) ...
+        - **ANN**    : Artificial Neural Network (ANN) model komputasi yang meniru cara kerja otak manusia dalam memproses informasi. ANN efektif digunakan untuk berbagai masalah kompleks, termasuk prediksi cuaca. Model ini terdiri dari neuron-neuron sederhana yang saling terhubung dan belajar mengenali pola dari data. 
+        - **LSTM**   : Long Short-Term Memory (LSTM) adalah pengembangan dari Recurrent Neural Network (RNN) yang dirancang untuk mengatasi masalah vanishing gradient saat mengolah data berurutan. LSTM memiliki kemampuan untuk mengingat informasi historis dalam jangka panjang, sehingga cocok untuk memodelkan data cuaca yang bersifat temporal.
         """)
 
     # Dataset Historikal

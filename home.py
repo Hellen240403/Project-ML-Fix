@@ -71,7 +71,7 @@ def app():
     st.image("asset/home.png", use_container_width=True)
     st.title("🌦️ Platform Prediksi Cuaca Surabaya")
 
-    col1, col2 = st.columns([1, 1.3])
+    col1, col2 = st.columns([1,2])
 
     # ---------------- Judul Kotak ---------------- #
     with col1:

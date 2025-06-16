@@ -83,7 +83,8 @@ def app():
         """, unsafe_allow_html=True)
 
     # Expanders
-    tab1, tab2, tab3 = st.tabs(["📘 Pendahuluan", "🎯 Tujuan", "💡 Manfaat"])
+    with st.expander("📘 Pendahuluan", expanded=False): 
+        tab1, tab2, tab3 = st.tabs(["📘 Pendahuluan", "🎯 Tujuan", "💡 Manfaat"])
     
     with tab1 : 
         st.info("""

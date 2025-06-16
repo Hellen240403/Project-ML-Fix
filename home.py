@@ -143,10 +143,10 @@ def app():
             """)
 
     with st.expander("🧠 Metode"):
-        st.markdown("
+        st.markdown("""
         - **ANN**    :Artificial Neural Network (ANN) adalah model komputasi yang meniru cara kerja otak manusia dalam memproses informasi. ANN efektif digunakan untuk berbagai masalah kompleks, termasuk prediksi cuaca. Model ini terdiri dari neuron-neuron sederhana yang saling terhubung dan belajar mengenali pola dari data.
         - **LSTM**   :Long Short-Term Memory (LSTM) merupakan pengembangan dari Recurrent Neural Network (RNN) yang dirancang untuk mengatasi masalah vanishing gradient saat mengolah data berurutan. LSTM memiliki kemampuan untuk mengingat informasi historis dalam jangka panjang, sehingga cocok untuk memodelkan data cuaca yang bersifat temporal. 
-                    ")
+        """)
 
     df = load_data("data/df_hujan.csv")
     if df is not None:

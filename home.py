@@ -6,10 +6,6 @@ from PIL import Image
 # ------------------------------------------------------------------ #
 #  CONFIG ACCUWEATHER API
 # ------------------------------------------------------------------ #
-# Pastikan ACCUWEATHER_KEY sudah ditambahkan ke .streamlit/secrets.toml
-API_KEY = "xQGm4v0qhpHLusHsjGGA5O2GJPNXAQSO"
-LOCATION_KEY = "203449"  # Surabaya
-
 @st.cache_data(ttl=600)
 def get_current_weather():
     """Ambil cuaca terkini Surabaya dari Open-Meteo (tanpa API key)"""

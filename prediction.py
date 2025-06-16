@@ -82,7 +82,7 @@ def app():
             <img src='{cloud_options[cloud_name]["img"]}' alt='Jenis Awan' style='max-width:300px; height:auto; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
             <p><strong>☁️ Jenis Awan: {cloud_name}</strong></p>
         </div>
-    """, unsafe_allow_html=True
+    """, unsafe_allow_html=True)
     cloud_code = cloud_options[cloud_name]["code"]
 
     if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):

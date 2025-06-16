@@ -78,7 +78,7 @@ def app():
         cloud_name = st.radio("☁️ Pilih Jenis Awan:", options=list(cloud_options.keys()), horizontal=True)
 
     with st.container():
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         st.image(cloud_options[cloud_name]["img"], width=300)
         st.markdown(f"<p style='text-align: center; font-weight: bold;'>☁️ Jenis Awan: {cloud_name}</p>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)

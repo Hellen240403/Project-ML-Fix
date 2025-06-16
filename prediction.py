@@ -83,7 +83,7 @@ def app():
         st.image(
             cloud_options[cloud_name]["img"],
             caption=f"☁️ Jenis Awan: {cloud_name}",
-            use_column_width=True
+            use_container_width=True
         )
     cloud_code = cloud_options[cloud_name]["code"]
 

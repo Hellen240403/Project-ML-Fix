@@ -49,8 +49,8 @@ def app():
     # Kolom kiri: Judul dan tombol
     with col1:
         st.markdown("### 📍 Cuaca Surabaya Hari Ini")
-            if st.button("🔄 Refresh"):
-               st.cache_data.clear()
+        if st.button("🔄 Refresh"):
+           st.cache_data.clear()
     # Kolom kanan: Kartu cuaca
     with col2:
         try:

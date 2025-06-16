@@ -82,7 +82,7 @@ def app():
             "Status"   : "Mahasiswa Aktif",
             "Motivasi" : "Setiap orang punya waktunya masing-masing, jadi jangan membandingkan start kamu dengan finish orang lain.",
             "Email"    : "hellenaldenia@gmail.com",
-            "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
+            "LinkedIn" : "https://www.linkedin.com/in/hellen-aldenia-rovi-69b27b235/"
         },
         {
             "Nama"     : "Endita Prastyansyach",

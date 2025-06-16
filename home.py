@@ -46,11 +46,12 @@ def app():
 
     col1, col2 = st.columns([1, 3])
 
+        if st.button("🔄 Refresh"):
+            st.cache_data.clear()
+    
     # Kolom kiri: Judul dan tombol
     with col1:
         st.markdown("### 📍 Cuaca Surabaya Hari Ini")
-        if st.button("🔄 Refresh"):
-            st.cache_data.clear()
 
     # Kolom kanan: Kartu cuaca
     with col2:

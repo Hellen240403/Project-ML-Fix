@@ -10,19 +10,25 @@ from PIL import Image
 API_KEY = "xQGm4v0qhpHLusHsjGGA5O2GJPNXAQSO"
 LOCATION_KEY = "203449"  # Surabaya
 
-@st.cache_data(ttl=600)  # cache 10 menit
+@st.cache_data(ttl=600)
 def get_current_weather():
-    """Ambil cuaca Surabaya terkini dari AccuWeather API"""
-    url    = f"https://dataservice.accuweather.com/currentconditions/v1/{LOCATION_KEY}"
-    params = {"apikey": API_KEY, "details": True, "language": "id-id"}
+    """Ambil cuaca terkini Surabaya dari Open-Meteo (tanpa API key)"""
+    url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": -7.2575,      # Koordinat Surabaya
+        "longitude": 112.7521,
+        "current": "temperature_2m,relative_humidity_2m,wind_speed_10m,uv_index",
+        "timezone": "Asia/Jakarta"
+    }
     r = requests.get(url, params=params, timeout=10)
     r.raise_for_status()
-    data = r.json()[0]
+    data = r.json()["current"]
+
     return {
-        "temperature": f"{data['Temperature']['Metric']['Value']}°C",
-        "humidity"   : f"{data['RelativeHumidity']}%",
-        "wind"       : f"{data['Wind']['Speed']['Metric']['Value']} km/h",
-        "uv"         : data["UVIndexText"]
+        "temperature": f"{data['temperature_2m']}°C",
+        "humidity"   : f"{data['relative_humidity_2m']}%",
+        "wind"       : f"{data['wind_speed_10m']} km/h",
+        "uv"         : f"UV Index {data['uv_index']}"
     }
 
 # ------------------------------------------------------------------ #

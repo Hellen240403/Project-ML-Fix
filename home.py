@@ -22,47 +22,65 @@ def get_current_weather():
     }
 
 def app():
+    # CSS Custom Style
     st.markdown("""
         <style>
+        .weather-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
         .weather-item {
             background-color: rgba(255,255,255,0.6);
             border-radius: 12px;
             padding: 6px 16px;
-            margin-right: 10px;
             font-size: 16px;
-            display: inline-block;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stButton > button {
+            height: 38px;
+            padding: 6px 12px;
         }
         </style>
     """, unsafe_allow_html=True)
 
+    # Gambar dan Judul
     st.image("asset/home.png", use_container_width=True)
     st.title("🌦️ Platform Prediksi Cuaca Surabaya")
-
     st.markdown("### 📍 Cuaca Surabaya Hari Ini")
 
-    # Baris horizontal: Refresh dan data cuaca
-    col1, col2, col3, col4, col5 = st.columns([1, 2, 2, 2, 2])
-
-    with col1:
-        if st.button("🔄 Refresh"):
-            st.cache_data.clear()
-
+    # Layout sejajar horizontal (refresh + cuaca)
+    weather = None
     try:
         weather = get_current_weather()
-
-        with col2:
-            st.markdown(f"<div class='weather-item'>🌡️ <b style='color:#d32f2f;'>Suhu:</b> {weather['temperature']}</div>", unsafe_allow_html=True)
-        with col3:
-            st.markdown(f"<div class='weather-item'>💧 <b style='color:#0288d1;'>Kelembapan:</b> {weather['humidity']}</div>", unsafe_allow_html=True)
-        with col4:
-            st.markdown(f"<div class='weather-item'>🌬️ <b style='color:#0277bd;'>Angin:</b> {weather['wind']}</div>", unsafe_allow_html=True)
-        with col5:
-            st.markdown(f"<div class='weather-item'>🌞 <b style='color:#fbc02d;'>UV:</b> {weather['uv']}</div>", unsafe_allow_html=True)
-
-        st.caption("📌 Data real-time — Open-Meteo API")
     except Exception as e:
         st.error(f"Data cuaca tidak tersedia: {e}")
+
+    st.markdown("<div class='weather-row'>", unsafe_allow_html=True)
+
+    # Tombol Refresh di kiri
+    with st.form(key="refresh_form", clear_on_submit=False):
+        submit_button = st.form_submit_button(label="🔄 Refresh")
+        if submit_button:
+            st.cache_data.clear()
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # Info cuaca di kanan
+    if weather:
+        st.markdown(f"""
+            <div class='weather-row'>
+                <div class='weather-item'>🌡️ <b style='color:#d32f2f;'>Suhu:</b> {weather['temperature']}</div>
+                <div class='weather-item'>💧 <b style='color:#0288d1;'>Kelembapan:</b> {weather['humidity']}</div>
+                <div class='weather-item'>🌬️ <b style='color:#0277bd;'>Angin:</b> {weather['wind']}</div>
+                <div class='weather-item'>🌞 <b style='color:#fbc02d;'>UV:</b> {weather['uv']}</div>
+            </div>
+            <div style='margin-top:-5px'>
+                <small>📌 Data real-time — Open-Meteo API</small>
+            </div>
+        """, unsafe_allow_html=True)
 
     # Expanders
     with st.expander("📘 Pendahuluan"):
@@ -74,7 +92,7 @@ def app():
         - **LSTM**   : Long Short-Term Memory (LSTM) ...
         """)
 
-    # Dataset
+    # Dataset Historikal
     try:
         df = pd.read_csv("data/df_hujan.csv", sep=";")
         df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')

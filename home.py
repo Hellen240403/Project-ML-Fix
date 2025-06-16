@@ -1,16 +1,12 @@
 import streamlit as st
 import pandas as pd
 import requests
-from PIL import Image
 
-# ------------------------------------------------------------------ #
-#  CONFIG OPEN-METEO API
-# ------------------------------------------------------------------ #
 @st.cache_data(ttl=600)
 def get_current_weather():
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
-        "latitude": -7.2575,  # Surabaya
+        "latitude": -7.2575,
         "longitude": 112.7521,
         "current": "temperature_2m,relative_humidity_2m,wind_speed_10m,uv_index",
         "timezone": "Asia/Jakarta"
@@ -18,7 +14,6 @@ def get_current_weather():
     r = requests.get(url, params=params, timeout=10)
     r.raise_for_status()
     data = r.json()["current"]
-
     return {
         "temperature": f"{data['temperature_2m']}°C",
         "humidity": f"{data['relative_humidity_2m']}%",
@@ -26,123 +21,72 @@ def get_current_weather():
         "uv": f"UV Index {data['uv_index']}"
     }
 
-# ------------------------------------------------------------------ #
-#  CSS
-# ------------------------------------------------------------------ #
-def set_custom_css():
-    st.markdown("""
-    <style>
-    .stApp {
-        background:white;
-        font-family:'Segoe UI', sans-serif;
-    }
-    .weather-card {
-        background: rgba(255,255,255,0.6);
-        border-radius: 18px;
-        padding: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,.1);
-        width: max-content;
-    }
-    .stTabs [data-baseweb="tab"] {
-        background: #f1f5f9;
-        color: #1e293b;
-        font-weight: bold;
-        border-radius: 10px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# ------------------------------------------------------------------ #
-#  LOAD DATA
-# ------------------------------------------------------------------ #
-def load_data(path):
-    try:
-        df = pd.read_csv(path, sep=';')
-        df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
-        return df
-    except Exception as e:
-        st.warning(f"Gagal memuat data historikal: {e}")
-        return None
-
-# ------------------------------------------------------------------ #
-#  MAIN PAGE
-# ------------------------------------------------------------------ #
 def app():
-    set_custom_css()
+    st.markdown("""
+        <style>
+        .weather-box {
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 15px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .weather-item {
+            min-width: 150px;
+            font-size: 16px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
     st.image("asset/home.png", use_container_width=True)
     st.title("🌦️ Platform Prediksi Cuaca Surabaya")
 
-    col1, col2 = st.columns([1, 2.5])
+    col1, col2 = st.columns([1, 3])
 
-    # Kolom kiri: Judul dan tombol refresh
+    # Kolom kiri: Judul dan tombol
     with col1:
-        st.markdown("""
-        <div style="background:#f0f3fa;padding:20px 30px;border-radius:12px;
-                    box-shadow:2px 2px 10px rgba(0,0,0,.1); width:max-content;">
-           <h3 style="margin:0;">📍 Cuaca Surabaya Hari Ini</h3>
-        </div>
-        """, unsafe_allow_html=True)
-
+        st.markdown("### 📍 Cuaca Surabaya Hari Ini")
         if st.button("🔄 Refresh"):
             st.cache_data.clear()
 
-    # Kolom kanan: Detail cuaca
+    # Kolom kanan: Kartu cuaca
     with col2:
         try:
             weather = get_current_weather()
-        except Exception as e:
-            st.error(f"Data cuaca tidak tersedia: {e}")
-            weather = None
-
-        if weather:
             st.markdown(f"""
-            <div class="weather-card" style="margin: 5px 0 10px 0; padding: 15px 25px;">
-              <div style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  flex-wrap: wrap;
-                  gap: 20px;
-                  font-size: 16px;
-                  min-width: 500px;
-                  ">
-                <div style="min-width: 120px;">🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</div>
-                <div style="min-width: 150px;">💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</div>
-                <div style="min-width: 140px;">🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</div>
-                <div style="min-width: 130px;">🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</div>
-              </div>
+            <div class="weather-box">
+                <div class="weather-item">🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</div>
+                <div class="weather-item">💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</div>
+                <div class="weather-item">🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</div>
+                <div class="weather-item">🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</div>
             </div>
             """, unsafe_allow_html=True)
-
             st.caption("📌 Data real-time — Open-Meteo API")
+        except Exception as e:
+            st.error(f"Data cuaca tidak tersedia: {e}")
 
-    # ---------------------------------------------------------------- #
-    # Penjelasan
-    with st.expander("📘 Pendahuluan", expanded=False):
-        tab1, tab2, tab3 = st.tabs(["📖 Latar Belakang", "🎯 Tujuan", "🎁 Manfaat"])
-        with tab1:
-            st.info("""...""")  # isi sesuai naskah
-        with tab2:
-            st.success("""...""")  # isi sesuai naskah
-        with tab3:
-            st.warning("""...""")  # isi sesuai naskah
+    # Expanders
+    with st.expander("📘 Pendahuluan"):
+        st.info("Isi penjelasan latar belakang di sini.")
 
-    # ---------------------------------------------------------------- #
     with st.expander("🧠 Metode"):
         st.markdown("""
-        - **ANN**    :Artificial Neural Network (ANN) adalah ...
-        - **LSTM**   :Long Short-Term Memory (LSTM) ...
+        - **ANN**    : Artificial Neural Network (ANN) adalah ...
+        - **LSTM**   : Long Short-Term Memory (LSTM) ...
         """)
 
-    # ---------------------------------------------------------------- #
-    df = load_data("data/df_hujan.csv")
-    if df is not None:
-        st.divider()
+    # Dataset
+    try:
+        df = pd.read_csv("data/df_hujan.csv", sep=";")
+        df.columns = df.columns.str.strip().str.lower().str.replace('\ufeff', '')
         st.subheader("📊 Data Cuaca Surabaya (2023–2025)")
         st.dataframe(df, use_container_width=True, height=350)
         st.caption("📌 Sumber: BMKG")
+    except Exception as e:
+        st.warning(f"Gagal memuat data historikal: {e}")
 
-# ------------------------------------------------------------------ #
 if __name__ == "__main__":
     app()

@@ -65,34 +65,34 @@ def app():
     # Profil Anggota
     team = [
         {
-            "Nama": "Dwi Ilham Ramadhany",
-            "img": "asset/IMG_4105.JPG",
-            "TTL": "Bangkalan, 7 November 2003",
-            "NRP": "2043221054",
-            "Status": "Mahasiswa Aktif",
-            "Motivasi": "Terus *fokus* dengan *prosesmu* sendiri, bukan dengan *validasi* dari orang lain.",
-            "Email": "dwrmdhany11@gmail.com",
-            "LinkedIn": "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
+            "Nama"     : "Dwi Ilham Ramadhany",
+            "img"      : "asset/IMG_4105.JPG",
+            "TTL"      : "Bangkalan, 7 November 2003",
+            "NRP"      : "2043221054",
+            "Status"   : "Mahasiswa Aktif",
+            "Motivasi" : "Terus *fokus* dengan *prosesmu* sendiri, bukan dengan *validasi* dari orang lain.",
+            "Email"    : "dwrmdhany11@gmail.com",
+            "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },
         {
-            "Nama": "Hellen Aldenia Rovi",
-            "img": "asset/formal.jpg",
-            "TTL": "Surabaya, 24 Agustus 2003",
-            "NRP": "2043221045",
-            "Status": "Mahasiswa Aktif",
-            "Motivasi": "Setiap orang punya waktunya masing-masing, jadi jangan *membandingkan start* kamu dengan *finish* orang lain ya.",
-            "Email": "hellenaldenia@gmail.com",
-            "LinkedIn": "https://linkedin.com/in/hellenaldenia"
+            "Nama"     : "Hellen Aldenia Rovi",
+            "img"      : "asset/IMG_3248_11zon.JPG",
+            "TTL"      : "Surabaya, 24 Agustus 2003",
+            "NRP"      : "2043221045",
+            "Status"   : "Mahasiswa Aktif",
+            "Motivasi" : "Setiap orang punya waktunya masing-masing, jadi jangan *membandingkan start* kamu dengan *finish* orang lain.",
+            "Email"    : "hellenaldenia@gmail.com",
+            "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },
         {
-            "Nama": "Endita Prastyansyach",
-            "img": "asset/IMG_4105.JPG",  # Ganti jika punya foto berbeda
-            "TTL": "Samarinda 10 agustus 2003",
-            "NRP": "2043221145",
-            "Status": "Mahasiswa Aktif",
-            "Motivasi": "Masa depanmu tidak ditentukan oleh *ucapan orang lain*, tetapi *langkah* apa *yang kamu ambil hari ini*.",
-            "Email": "endiaprastyansyach@gmail.com",
-            "LinkedIn": "www.linkedin.com/in/endita-prastyansyach-22a84236b"
+            "Nama"     : "Endita Prastyansyach",
+            "img"      : "asset/formal.jpg",
+            "TTL"      : "Surabaya, 24 Agustus 2003",
+            "NRP"      : "2043221145",
+            "Status"   : "Mahasiswa Aktif",
+            "Motivasi" : "Masa depanmu tidak ditentukan oleh *ucapan orang lain*, tetapi *langkah* apa *yang kamu ambil hari ini*.",
+            "Email"    : "endiaprastyansyach@gmail.com",
+            "LinkedIn" : "www.linkedin.com/in/endita-prastyansyach-22a84236b"
         }
     ]
 

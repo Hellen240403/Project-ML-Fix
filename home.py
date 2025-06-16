@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import requests
 
+    if st.button("🔄 Refresh"):
+       st.cache_data.clear()
+
 @st.cache_data(ttl=600)
 def get_current_weather():
     url = "https://api.open-meteo.com/v1/forecast"
@@ -45,9 +48,6 @@ def app():
     st.title("🌦️ Platform Prediksi Cuaca Surabaya")
 
     col1, col2 = st.columns([1, 3])
-
-        if st.button("🔄 Refresh"):
-            st.cache_data.clear()
     
     # Kolom kiri: Judul dan tombol
     with col1:

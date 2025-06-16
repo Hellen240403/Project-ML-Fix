@@ -73,48 +73,50 @@ def app():
 
     col1, col2 = st.columns([1,2])
 
-    # ---------------- Judul Kotak ---------------- #
-    with col1:
-        st.markdown("""
-        <div style="background:#f0f3fa;padding:20px 30px;border-radius:12px;
-                    box-shadow:2px 2px 10px rgba(0,0,0,.1); width:max-content;">
-           <h3 style="margin:0;">📍 Cuaca Surabaya Hari Ini</h3>
+# ---------------- Judul + Refresh + Cuaca ---------------- #
+with st.container():
+     st.markdown("""
+    <div style="background:#f0f3fa;padding:20px 30px;border-radius:12px;
+                box-shadow:2px 2px 10px rgba(0,0,0,.1); width:max-content;">
+       <h3 style="margin:0;">📍 Cuaca Surabaya Hari Ini</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("")
+
+    # Tombol refresh
+    if st.button("🔄 Refresh"):
+        st.cache_data.clear()
+
+    # Ambil data cuaca
+    try:
+        weather = get_current_weather()
+    except Exception as e:
+        st.error(f"Data cuaca tidak tersedia: {e}")
+        weather = None
+
+    # Tampilkan data jika ada
+    if weather:
+        st.markdown(f"""
+        <div class="weather-card" style="margin-top: 10px; padding: 15px 25px;">
+          <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 20px;
+              font-size: 16px;
+              min-width: 500px;
+              ">
+            <div style="min-width: 120px;">🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</div>
+            <div style="min-width: 150px;">💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</div>
+            <div style="min-width: 140px;">🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</div>
+            <div style="min-width: 130px;">🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</div>
+          </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # ---------------- Kartu Cuaca ---------------- #
-    with col2:
-        weather = None
-        if st.button("🔄 Refresh"):
-            st.cache_data.clear()
-    
-        try:
-            weather = get_current_weather()
-        except Exception as e:
-            st.error(f"Data cuaca tidak tersedia: {e}")
-            
-        if weather:
-            st.markdown(f"""
-            <div class="weather-card" style="margin: 10px 0 10px 10px; padding: 15px 25px;">
-              <div style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  flex-wrap: wrap;
-                  gap: 20px;
-                  font-size: 16px;
-                  min-width: 500px;
-                  ">
-                <div style="min-width: 120px;">🌡️ <b style="color:#d32f2f;">Suhu:</b> {weather['temperature']}</div>
-                <div style="min-width: 150px;">💧 <b style="color:#0288d1;">Kelembapan:</b> {weather['humidity']}</div>
-                <div style="min-width: 140px;">🌬️ <b style="color:#0277bd;">Angin:</b> {weather['wind']}</div>
-                <div style="min-width: 130px;">🌞 <b style="color:#fbc02d;">UV:</b> {weather['uv']}</div>
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
-    
-            st.caption("📌 Data real-time — AccuWeather API")
-
+        st.caption("📌 Data real-time — AccuWeather API")
 
     # ------------- Penjelasan & Dataset ---------- #
     with st.expander("📘 Pendahuluan", expanded=False):

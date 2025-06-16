@@ -70,7 +70,7 @@ def app():
             "TTL"      : "Bangkalan, 7 November 2003",
             "NRP"      : "2043221054",
             "Status"   : "Mahasiswa Aktif",
-            "Motivasi" : "Terus *fokus* dengan *prosesmu* sendiri, bukan dengan *validasi* dari orang lain.",
+            "Motivasi" : "Terus fokus dengan **prosesmu** sendiri, bukan dengan validasi dari orang lain.",
             "Email"    : "dwrmdhany11@gmail.com",
             "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },
@@ -80,7 +80,7 @@ def app():
             "TTL"      : "Surabaya, 24 Agustus 2003",
             "NRP"      : "2043221045",
             "Status"   : "Mahasiswa Aktif",
-            "Motivasi" : "Setiap orang punya waktunya masing-masing, jadi jangan *membandingkan start* kamu dengan *finish* orang lain.",
+            "Motivasi" : "Setiap orang punya waktunya masing-masing, jadi jangan membandingkan start kamu dengan finish orang lain.",
             "Email"    : "hellenaldenia@gmail.com",
             "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },
@@ -90,7 +90,7 @@ def app():
             "TTL"      : "Surabaya, 24 Agustus 2003",
             "NRP"      : "2043221145",
             "Status"   : "Mahasiswa Aktif",
-            "Motivasi" : "Masa depanmu tidak ditentukan oleh *ucapan orang lain*, tetapi *langkah* apa *yang kamu ambil hari ini*.",
+            "Motivasi" : "Masa depanmu tidak ditentukan oleh ucapan orang lain, tetapi langkah apa yang kamu ambil hari ini.",
             "Email"    : "endiaprastyansyach@gmail.com",
             "LinkedIn" : "www.linkedin.com/in/endita-prastyansyach-22a84236b"
         }
@@ -106,7 +106,7 @@ def app():
             with col1:
                 try:
                     img = Image.open(member["img"])
-                    if member["Nama"] in ["Dwi Ilham Ramadhany", "Endita Prastyansyach"]:
+                    if member["Nama"] == "Dwi Ilham Ramadhany":
                         img = img.rotate(-90, expand=True)
                     st.image(img, caption=member["Nama"], use_container_width=True)
                 except Exception as e:

@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 
-    if st.button("🔄 Refresh"):
-       st.cache_data.clear()
-
 @st.cache_data(ttl=600)
 def get_current_weather():
     url = "https://api.open-meteo.com/v1/forecast"
@@ -52,7 +49,8 @@ def app():
     # Kolom kiri: Judul dan tombol
     with col1:
         st.markdown("### 📍 Cuaca Surabaya Hari Ini")
-
+            if st.button("🔄 Refresh"):
+               st.cache_data.clear()
     # Kolom kanan: Kartu cuaca
     with col2:
         try:

@@ -70,7 +70,7 @@ def app():
             "TTL"      : "Bangkalan, 7 November 2003",
             "NRP"      : "2043221054",
             "Status"   : "Mahasiswa Aktif",
-            "Motivasi" : "Terus fokus dengan **prosesmu** sendiri, bukan dengan validasi dari orang lain.",
+            "Motivasi" : "Terus fokus dengan prosesmu sendiri, bukan dengan validasi dari orang lain.",
             "Email"    : "dwrmdhany11@gmail.com",
             "LinkedIn" : "https://www.linkedin.com/in/dwi-ilham-ramadhany-6b5674331/"
         },

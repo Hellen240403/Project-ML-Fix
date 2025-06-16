@@ -77,7 +77,12 @@ def app():
         wind_speed = st.slider('🌬️ Kecepatan Angin (km/jam)', 0.0, 100.0, 25.0, 1.0)
         cloud_name = st.radio("☁️ Pilih Jenis Awan:", options=list(cloud_options.keys()), horizontal=True)
 
-    st.image(cloud_options[cloud_name]["img"], caption=f"☁️ Jenis Awan: {cloud_name}", use_container_width=True)
+        st.markdown(f"""
+        <div style='text-align:center;'>
+            <img src='{cloud_options[cloud_name]["img"]}' alt='Jenis Awan' style='max-width:300px; height:auto; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
+            <p><strong>☁️ Jenis Awan: {cloud_name}</strong></p>
+        </div>
+    """, unsafe_allow_html=True
     cloud_code = cloud_options[cloud_name]["code"]
 
     if st.button('🚀 Mulai Prediksi Cuaca', use_container_width=True, type="primary"):

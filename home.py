@@ -84,7 +84,7 @@ def app():
 
     # Expanders
     with st.expander("📘 Pendahuluan", expanded=False): 
-        tab1, tab2, tab3 = st.tabs(["📘 Pendahuluan", "🎯 Tujuan", "💡 Manfaat"])
+        tab1, tab2, tab3 = st.tabs(["📘 Latar Belakang", "🎯 Tujuan", "💡 Manfaat"])
     
     with tab1 : 
         st.info("""
